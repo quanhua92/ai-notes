@@ -33,5 +33,6 @@ All guides are structured using the Feynman learning method to build deep, intui
 ## 🛠️ Prompt Engineering Templates
 
   * **[Feynman Article Enhancer](./prompts/feynman-article-enhancer.md)**: Enhances educational articles using the Feynman learning method. 
-  * **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document for engineering teams. 
+  * **[Feynman Article Generator](./prompts/feynman-article-generator.md)**: Generates a comprehensive technical article from a discussion using a structured, Feynman-inspired format.
+  * **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams. 
   * **[Video Transcription Enhancer](./prompts/video-transcription-enhancer.md)**: Reformats raw text transcripts for clarity while preserving the original content. 
