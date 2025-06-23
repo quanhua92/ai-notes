@@ -8,10 +8,10 @@ Exploring ideas, prompts, and personal insights from curious conversations with 
 
 All guides are structured using the Feynman learning method to build deep, intuitive understanding of complex systems. 
 
-### Rust
+### Kafka
 
-  * [A Deep Dive into Rust: From Fundamentals to Production Patterns](./rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
-      * *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
+  * [Technical Deep Dive: Kafka Consumer Fault Tolerance and Rebalancing](./kafka/kafka-consumer-fault-tolerance-and-rebalancing.md)
+      * *Core Concepts: Fault Tolerance, At-Least-Once Delivery, Rebalancing, Idempotency, Dead Letter Queues (DLQ).*
 
 ### PostgreSQL
 
@@ -22,6 +22,11 @@ All guides are structured using the Feynman learning method to build deep, intui
 
   * [The Modern React Stack: A Feynman Guide from First Principles to Production](./react/the-modern-react-stack-a-feynman-guide-from-first-principles-to-production.md)
       * *Core Concepts: TanStack Router, TanStack Query, Zustand, Zod, Type-Safe Patterns.*
+
+### Rust
+
+  * [A Deep Dive into Rust: From Fundamentals to Production Patterns](./rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
+      * *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
 
 -----
 
