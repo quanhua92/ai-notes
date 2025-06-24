@@ -18,6 +18,11 @@ All guides are structured using the Feynman learning method to build deep, intui
   * [A Feynman-Method Guide from Fundamentals to Production](./postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
       * *Core Concepts: Architecture (MVCC, WAL), SQL Mastery, Performance Engineering (`EXPLAIN`, Indexing), Row-Level Security (RLS).*
 
+### PyTorch
+
+  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./pytorch/mastering-pytorch-for-llms.md)
+      * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
+
 ### React
 
   * [The Modern React Stack: A Feynman Guide from First Principles to Production](./react/the-modern-react-stack-a-feynman-guide-from-first-principles-to-production.md)
@@ -31,7 +36,7 @@ All guides are structured using the Feynman learning method to build deep, intui
 -----
 
 ## 🛠️ Prompt Engineering Templates
-
+  * **[Comprehensive Learning](./prompts/comprehensive-learning.md)**: Generates a structured and comprehensive learning plan for mastering a new topic, from fundamentals to advanced applications.
   * **[Feynman Article Enhancer](./prompts/feynman-article-enhancer.md)**: Enhances educational articles using the Feynman learning method. 
   * **[Feynman Article Generator](./prompts/feynman-article-generator.md)**: Generates a comprehensive technical article from a discussion using a structured, Feynman-inspired format.
   * **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams. 
