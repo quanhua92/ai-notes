@@ -33,6 +33,8 @@ All guides are structured using the Feynman learning method to build deep, intui
   * [A Deep Dive into Rust: From Fundamentals to Production Patterns](./rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
       * *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
 
+  * [Architecting a State-Aware Conversational Bot with Rust, Axum, Teloxide, and PostgreSQL](./rust/architecting-a-state-aware-conversational-bot.md)
+      * *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
 -----
 
 ## 🛠️ Prompt Engineering Templates
