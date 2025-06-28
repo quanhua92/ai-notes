@@ -20,19 +20,26 @@ This article delves into the `schemars` crate, not merely as a "Rust-to-TypeScri
 Underpinning this entire ecosystem is the `serde` crate. `schemars` is meticulously designed for deep compatibility with `serde`'s serialization and deserialization rules. It inspects `#[serde(...)]` attributes to determine the final shape of the JSON representation. Consequently, a developer using `schemars` is not just reflecting a Rust type; they are reflecting how `serde_json` will serialize that type. The mental model must be: "I am configuring my `serde` serialization, and `schemars` is the tool that documents that configuration as a formal, shareable JSON Schema contract". This fundamental understanding is key to mastering the powerful workflows detailed in this guide.
 
 ```mermaid
-graph TD
-    A[Rust Codebase<br>(Single Source of Truth)] --> B{`schemars` Crate<br>(Contract Generation)};
-    B --> C[JSON Schema<br>(Language-Agnostic Contract)];
-    C --> D[TypeScript Frontend<br>(`json-schema-to-typescript`)];
-    C --> E[Other Consumers<br>(Python, Java, Documentation, Testing)];
-
-    subgraph The Workflow
-        A -- Defines Data Structures --> A;
-        A -- Drives Schema Generation --> B;
-        B -- Produces --> C;
-        C -- Consumed by --> D;
-        C -- Consumed by --> E;
-    end
+---
+config:
+  layout: elk
+---
+flowchart TD
+ subgraph subGraph0["The Workflow"]
+        A["Rust Codebase<br>(Single Source of Truth)"]
+        B{"schemars Crate<br>(Contract Generation)"}
+        C["JSON Schema<br>(Language-Agnostic Contract)"]
+        D@{ label: "TypeScript Frontend<br>(`json-schema-to-typescript`)" }
+        E["Other Consumers<br>(Python, Java, Documentation, Testing)"]
+  end
+    A --> B
+    B --> C
+    C --> D & E
+    A -- Defines Data Structures --> A
+    A -- Drives Schema Generation --> B
+    B -- Produces --> C
+    C -- Consumed by --> D & E
+    D@{ shape: rect}
 ```
 -----
 
@@ -62,17 +69,17 @@ graph TD
     D --> I[API Documentation Generators];
 
     subgraph Data Flow
-        B --&gt; C;
+        B --> C;
     end
     subgraph Contract Generation
-        C --&gt; D;
+        C --> D;
     end
     subgraph Consumption
-        D --&gt; E;
-        D --&gt; F;
-        D --&gt; G;
-        D --&gt; H;
-        D --&gt; I;
+        D --> E;
+        D --> F;
+        D --> G;
+        D --> H;
+        D --> I;
     end
 ```
 
@@ -1246,7 +1253,7 @@ graph TD
         C --> E[Automated API Testing];
         C --> F[Mock Data Generation];
         C --> G[Dynamic Form Generation];
-        C --> H[API Documentation (e.g., OpenAPI)];
+        C --> H["API Documentation (e.g., OpenAPI)"];
         C --> I[Code Generation for Other Languages];
     end
 
