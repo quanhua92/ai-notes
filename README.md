@@ -40,6 +40,9 @@ All guides are structured using the Feynman learning method to build deep, intui
   * [Architecting a State-Aware Conversational Bot in Rust: A Deep Dive](./rust/architecting-a-state-aware-conversational-bot.md)
       * *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
 
+* [Building a Performant AI Agent Framework in Rust from Scratch](./rust/rust-ai-agent-framework-from-scratch.md)
+      * *Core Concepts: ReAct Paradigm, Modular Design (Traits), Tool Use, State Management, Async Orchestration.*
+
   * [Type-Safe Full-Stack Development: Bridging Rust and TypeScript with Schemas](./rust/type-safe-full-stack-development-rust-typescript.md)
       * *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 -----
