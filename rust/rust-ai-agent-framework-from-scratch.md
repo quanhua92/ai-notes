@@ -225,14 +225,18 @@ sequenceDiagram
     ToolManager-->>AgentExecutor: Returns descriptions
     AgentExecutor->>LLM: Sends assembled prompt (history + tools + input)
     LLM-->>AgentExecutor: Returns response in ReAct format (Thought + Action)
-    AgentExecutor->>AgentExecutor: Parses response
-    alt UseTool Action
-        AgentExecutor->>ToolManager: Executes specified tool with input
-        ToolManager-->>AgentExecutor: Returns result (Observation)
-        AgentExecutor-->>LLM: Loop continues with new Observation in prompt
-    else Finish Action
-        AgentExecutor->>Memory: Saves user input and final AI response
-        AgentExecutor-->>User: Returns the final answer
+    
+    loop ReAct Cycle
+        AgentExecutor->>AgentExecutor: Parses response
+        alt UseTool Action
+            AgentExecutor->>ToolManager: Executes specified tool with input
+            ToolManager-->>AgentExecutor: Returns result (Observation)
+            AgentExecutor-->>LLM: Loop continues with new Observation in prompt
+        else Finish Action
+            AgentExecutor->>Memory: Saves user input and final AI response
+            AgentExecutor-->>User: Returns the final answer
+            break
+        end
     end
 ```
 
@@ -283,7 +287,7 @@ First, we define the `Role` of a message originator as a simple enum. This ensur
 // src/primitives.rs
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub enum Role {
     System,
     Human,
@@ -309,6 +313,7 @@ Finally, we define the `Document` struct. This is a generic container for unstru
 // src/primitives.rs
 use std::collections::HashMap;
 
+#[derive(Debug, Clone)]
 pub struct Document {
     pub page_content: String,
     pub metadata: HashMap<String, String>,
@@ -330,9 +335,11 @@ pub enum LLMError {
     #[error("API request failed: {0}")]
     RequestError(#[from] reqwest::Error),
     #[error("Failed to parse response: {0}")]
-    ParseError(#[from] serde_json::Error),
+    ParseError(String),
     #[error("API returned an error: {0}")]
     ApiError(String),
+    #[error("An unexpected error occurred: {0}")]
+    UnexpectedError(String),
 }
 
 #[async_trait]
@@ -350,7 +357,7 @@ pub trait LLM: Send + Sync {
 
 With the trait defined, we can now provide a concrete implementation. The following struct, `OpenAI`, will connect to any OpenAI-compatible API endpoint. It will use the `reqwest` crate for making HTTP requests and `serde` for handling JSON.
 
-A critical aspect of this implementation is the **secure handling of API keys**. Hardcoding credentials is a major security risk. Instead, the API key should be loaded from an environment variable at runtime, a best practice for production-ready systems.
+A critical aspect of this implementation is the **secure handling of API keys**. Hardcoding credentials is a major security risk. Instead, the API key should be loaded from an environment variable at runtime, a best practice for production-ready systems. The `invoke` method is designed to be robust, handling potential API errors and parsing failures without panicking.
 
 ```rust
 // src/llm.rs
@@ -381,27 +388,37 @@ impl OpenAI {
 #[async_trait]
 impl LLM for OpenAI {
     async fn invoke(&self, messages: &[Message]) -> Result<String, LLMError> {
+        // Construct the request body
         let request_body = serde_json::json!({
             "model": &self.model,
             "messages": messages,
         });
 
-        let response: Value = self.client.post(&self.api_base)
+        // Send the request and get the response
+        let response = self.client.post(&self.api_base)
             .bearer_auth(&self.api_key)
             .json(&request_body)
             .send()
-            .await?
-            .json::<Value>()
             .await?;
 
-        if let Some(error) = response.get("error") {
+        // Deserialize the response into a generic JSON Value
+        let response_value: Value = response.json().await?;
+
+        // **Robust Error Handling**: Check for an 'error' key in the API response
+        if let Some(error) = response_value.get("error") {
+            // If the key exists, return a structured API error
             return Err(LLMError::ApiError(error.to_string()));
         }
 
-        let content = response["choices"][0]["message"]["content"]
-            .as_str()
-            .ok_or_else(|| LLMError::ParseError(serde_json::from_str("Missing content field").unwrap()))
-            .map(String::from)?;
+        // **Safe Parsing**: Extract the content without using unwrap()
+        let content = response_value
+            .get("choices")
+            .and_then(|choices| choices.get(0))
+            .and_then(|choice| choice.get("message"))
+            .and_then(|message| message.get("content"))
+            .and_then(|content| content.as_str())
+            .map(String::from)
+            .ok_or_else(|| LLMError::ParseError("Could not find 'content' in API response".to_string()))?;
         
         Ok(content)
     }
@@ -651,7 +668,7 @@ The design of this prompt is therefore a core architectural task. It must contai
 
 Here is an example of what this **master ReAct prompt template** might look like:
 
-```
+```text
 You are a helpful assistant that can use tools to answer questions.
 You have access to the following tools:
 {tool_descriptions}
@@ -661,12 +678,37 @@ To answer the user's question, you must follow this cycle:
 2. Action: Use one of the available tools. The action must be in the format `tool_name[input]`.
 When you have the final answer, use the action `Finish[your final answer]`.
 
+--- START OF CONVERSATION ---
+{history}
+--- END OF CONVERSATION ---
+
+Begin!
+
 User's question: {input}
+{scratchpad}
 ```
 
 #### The Thought-Action-Observation Cycle in Code
 
-The ReAct loop will be an iterative process within our main execution logic. In each iteration, the agent will:
+The ReAct loop will be an iterative process within our main execution logic. This diagram illustrates the flow:
+
+```mermaid
+flowchart TD
+    subgraph AgentExecutor
+        A[Start: User Input] --> B{Construct Prompt};
+        B -- "Prompt with History, Tools, Input, Scratchpad" --> C(Invoke LLM);
+        C -- "LLM Response (Thought + Action)" --> D{Parse Action};
+        D -- "Action: Finish[...]" --> F[Return Final Answer];
+        D -- "Action: tool_name[...]" --> E(Execute Tool);
+        E -- "Observation (Tool Result)" --> G{Update Scratchpad};
+        G --> B;
+        D -- "Parse Error" --> H{Update Scratchpad with Error};
+        H --> B;
+    end
+    F --> I[End];
+```
+
+In each iteration, the agent will:
 
 1.  Assemble the current context (history, tools, user query, previous steps).
 2.  Call the LLM.
@@ -684,7 +726,7 @@ We can define an enum to represent the parsed action, as discussed in the archit
 ```rust
 // src/agent.rs
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum AgentAction {
     UseTool { tool: String, input: String },
     Finish { answer: String },
@@ -696,19 +738,21 @@ And a parsing function using the `regex` crate:
 ```rust
 // src/agent.rs
 use regex::Regex;
+use once_cell::sync::Lazy;
+
+// Using once_cell::sync::Lazy to compile regex only once
+static TOOL_RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"Action:\s*(\w+)\s*\[\s*(.*)\s*\]").unwrap());
+static FINISH_RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"Action:\s*Finish\s*\[\s*(.*)\s*\]").unwrap());
 
 pub fn parse_action(text: &str) -> Option<AgentAction> {
-    let tool_re = Regex::new(r"Action: (\w+)\[(.*?)\]").unwrap();
-    let finish_re = Regex::new(r"Action: Finish\[(.*?)\]").unwrap();
-
-    if let Some(caps) = tool_re.captures(text) {
-        let tool = caps.get(1).map_or("", |m| m.as_str()).to_string();
-        let input = caps.get(2).map_or("", |m| m.as_str()).to_string();
-        return Some(AgentAction::UseTool { tool, input });
-    }
-    if let Some(caps) = finish_re.captures(text) {
-        let answer = caps.get(1).map_or("", |m| m.as_str()).to_string();
+    if let Some(caps) = FINISH_RE.captures(text) {
+        let answer = caps.get(1).map_or("", |m| m.as_str()).trim().to_string();
         return Some(AgentAction::Finish { answer });
+    }
+    if let Some(caps) = TOOL_RE.captures(text) {
+        let tool = caps.get(1).map_or("", |m| m.as_str()).trim().to_string();
+        let input = caps.get(2).map_or("", |m| m.as_str()).trim().to_string();
+        return Some(AgentAction::UseTool { tool, input });
     }
     None
 }
@@ -717,6 +761,7 @@ pub fn parse_action(text: &str) -> Option<AgentAction> {
 ***Why This Way?***
 
   * Using `Option<AgentAction>` is idiomatic Rust for functions that might not produce a value. If the LLM output doesn't match our expected format, the function gracefully returns `None` instead of crashing, allowing the calling code to handle the failure.
+  * `once_cell::sync::Lazy` ensures that the computationally expensive task of compiling the regular expressions happens only once, the first time they are needed, and is then available safely across multiple threads.
 
 #### State Management within the ReAct Loop
 
@@ -731,6 +776,7 @@ loop {
     let current_prompt = format_react_prompt(user_input, tool_descriptions, &scratchpad);
     let llm_response = llm.invoke(&[Message::human(current_prompt)]).await?;
 
+    scratchpad.push_str("\n");
     scratchpad.push_str(&llm_response); // Add the thought and action to the scratchpad
 
     match parse_action(&llm_response) {
@@ -776,15 +822,16 @@ The simplest and most common form of memory is a buffer that stores the entire c
 
 ```rust
 // src/memory.rs
-use crate::primitives::{Message, Role};
+use crate::primitives::{Message};
 
+#[derive(Default)]
 pub struct ConversationBufferMemory {
     messages: Vec<Message>,
 }
 
 impl ConversationBufferMemory {
     pub fn new() -> Self {
-        Self { messages: Vec::new() }
+        Self::default()
     }
 }
 
@@ -823,22 +870,24 @@ The `AgentExecutor` is the public-facing entry point to our framework. It encaps
 
 ```rust
 // src/agent.rs
-use crate::llm::{LLM, LLMError};
+use crate::llm::LLM;
 use crate::memory::Memory;
 use crate::tools::manager::ToolManager;
 use crate::primitives::{Message, Role};
+use std::error::Error;
 
-// Assuming AgentAction and parse_action are in this file as well
+// AgentAction and parse_action are assumed to be in this file as well.
 
 pub struct AgentExecutor {
     llm: Box<dyn LLM>,
     tool_manager: ToolManager,
     memory: Box<dyn Memory>,
+    max_iterations: u32,
 }
 
 impl AgentExecutor {
     pub fn new(llm: Box<dyn LLM>, tool_manager: ToolManager, memory: Box<dyn Memory>) -> Self {
-        Self { llm, tool_manager, memory }
+        Self { llm, tool_manager, memory, max_iterations: 5 }
     }
 
     // The main run method will be defined here
@@ -847,13 +896,9 @@ impl AgentExecutor {
 
 #### The Final Execution Flow
 
-The `run` method of the `AgentExecutor` implements the complete logic we've designed over the previous milestones. It manages the state of the conversation and the ReAct trajectory.
+The `run` method of the `AgentExecutor` implements the complete logic we've designed over the previous milestones. It manages the state of the conversation and the ReAct trajectory. This sequence diagram illustrates the complex interactions orchestrated by the `run` method.
 
 ```mermaid
----
-config:
-  look: elk
----
 sequenceDiagram
     participant User
     participant AgentExecutor
@@ -864,8 +909,7 @@ sequenceDiagram
     User->>+AgentExecutor: run(user_input)
     AgentExecutor->>+Memory: add_message(Human, user_input)
     Memory-->>-AgentExecutor: ack
-    AgentExecutor->>Memory: deactivate
-
+    
     loop ReAct Cycle (max_iterations)
         AgentExecutor->>+Memory: get_history()
         Memory-->>-AgentExecutor: history
@@ -873,7 +917,7 @@ sequenceDiagram
         AgentExecutor->>+ToolManager: get_tool_descriptions()
         ToolManager-->>-AgentExecutor: tool_descriptions
 
-        AgentExecutor->>AgentExecutor: Construct full prompt
+        AgentExecutor->>AgentExecutor: Construct full prompt (with scratchpad)
         AgentExecutor->>+LLM: invoke(full_prompt)
         LLM-->>-AgentExecutor: llm_response (Thought + Action)
         AgentExecutor->>AgentExecutor: parse_action(llm_response)
@@ -885,73 +929,108 @@ sequenceDiagram
         else Finish
             AgentExecutor->>+Memory: add_message(AI, answer)
             Memory-->>-AgentExecutor: ack
-            AgentExecutor->>Memory: deactivate
-            AgentExecutor-->>User: Ok(answer)
+            AgentExecutor-->>-User: Ok(answer)
             break
-        end
-
         else Parse Failure
             AgentExecutor->>AgentExecutor: Append error message to scratchpad
         end
     end
 
     Note over AgentExecutor, User: If loop exits without break
-    AgentExecutor-->>User: Max iterations reached
+    AgentExecutor-->>User: Err(Max iterations reached)
 ```
 
-```rust
-// Inside AgentExecutor impl
-pub async fn run(&mut self, user_input: &str) -> Result<String, Box<dyn std::error::Error>> {
-    // 1. Add user message to memory
-    self.memory.add_message(Message { role: Role::Human, content: user_input.to_string() });
+And here is the complete, annotated implementation of the `run` method.
 
-    // 2. Assemble the prompt components
+```rust
+// Inside impl AgentExecutor
+pub async fn run(&mut self, user_input: &str) -> Result<String, Box<dyn Error>> {
+    // 1. Add the new user message to conversation history.
+    self.memory.add_message(Message {
+        role: Role::Human,
+        content: user_input.to_string(),
+    });
+
+    // 2. Get tool descriptions to inject into the master prompt.
     let tool_descriptions = self.tool_manager.get_tool_descriptions();
     
-    // The master ReAct prompt template from Milestone 4
-    let base_prompt_template = format!(
-        "You are a helpful assistant...\nTools: {}\n...Respond in Thought/Action format.\nUser's question: {}",
-        tool_descriptions,
-        user_input
+    // 3. Define the master ReAct prompt template. This is the agent's "OS".
+    let base_prompt = format!(
+        "You are a helpful assistant. Your goal is to answer the user's question.
+
+You have access to the following tools:
+{tools}
+
+To use a tool, respond with:
+Action: tool_name[input]
+
+When you have the final answer, respond with:
+Action: Finish[your final answer]
+
+You must respond in the format:
+Thought: Your reasoning for the action.
+Action: The action to take.",
+        tools = tool_descriptions
     );
 
+    // This will hold the "Thought, Action, Observation" sequence for the current run.
     let mut scratchpad = String::new();
-    let max_iterations = 5;
-
-    for _ in 0..max_iterations {
-        // 3. Construct the full prompt for this iteration
-        let mut history = self.memory.get_history();
-        let react_prompt = base_prompt_template.clone() + &scratchpad;
+    
+    for i in 0..self.max_iterations {
+        // 4. Assemble the full prompt for this iteration.
+        // It includes the master prompt, conversation history, user input, and the current scratchpad.
+        let history_str = self.memory.get_history().iter()
+            .map(|m| format!("{:?}: {}", m.role, m.content))
+            .collect::<Vec<_>>().join("\n");
         
-        // We'll send history and the current ReAct prompt as separate messages
-        // For simplicity here, we combine them. A better approach might use a proper message list.
-        let full_prompt = Message { role: Role::Human, content: react_prompt };
-        history.push(full_prompt);
+        let prompt_content = format!(
+            "{base}\n\n--- CONVERSATION HISTORY ---\n{history}\n\n--- CURRENT TASK ---\nQuestion: {input}\n{scratchpad}",
+            base = base_prompt,
+            history = history_str,
+            input = user_input,
+            scratchpad = scratchpad
+        );
 
+        let messages = vec![Message { role: Role::Human, content: prompt_content }];
 
-        // 4. Invoke LLM
-        let llm_response = self.llm.invoke(&history).await?;
+        // 5. Invoke the LLM with the complete context.
+        let llm_response = self.llm.invoke(&messages).await?;
+        scratchpad.push_str("\n");
         scratchpad.push_str(&llm_response);
 
-        // 5. Parse and act
+        // 6. Parse the LLM's response to decide the next action.
         match parse_action(&llm_response) {
             Some(AgentAction::UseTool { tool, input }) => {
-                let observation = self.tool_manager.execute_tool(&tool, &input).await?;
-                scratchpad.push_str(&format!("\nObservation: {}\n", observation));
+                // Agent wants to use a tool.
+                let observation = match self.tool_manager.execute_tool(&tool, &input).await {
+                    Ok(result) => result,
+                    Err(e) => format!("Tool execution failed: {}", e),
+                };
+                scratchpad.push_str(&format!("\nObservation: {}", observation));
             },
             Some(AgentAction::Finish { answer }) => {
-                // 6. Save final answer to memory and return
-                self.memory.add_message(Message { role: Role::AI, content: answer.clone() });
+                // Agent is finished. Save the final answer to memory and return it.
+                self.memory.add_message(Message {
+                    role: Role::AI,
+                    content: answer.clone(),
+                });
                 return Ok(answer);
             },
             None => {
-                // If parsing fails, we can add the raw response as an observation and let the agent self-correct
-                scratchpad.push_str("\nObservation: Could not parse action. Please try again.\n");
+                // LLM failed to respond in the correct format.
+                // We add an observation to the scratchpad to let it "self-correct".
+                scratchpad.push_str("\nObservation: Your response was not in the correct format. Please respond with a 'Thought:' and an 'Action:'.");
             }
+        }
+        
+        // Safety break to prevent infinite loops if something goes wrong.
+        if i == self.max_iterations - 1 {
+            return Err("Agent reached max iterations without finishing.".into());
         }
     }
 
-    Err("Agent reached max iterations without finishing.".into())
+    // This should ideally not be reached if max_iterations > 0
+    Err("Agent failed to produce a response.".into())
 }
 ```
 
@@ -961,27 +1040,35 @@ Finally, we provide a complete `main.rs` file to demonstrate how to initialize a
 
 ```rust
 // src/main.rs
-// Assuming all modules are correctly declared in lib.rs
-// use my_agent_framework::agent::{AgentExecutor, parse_action};
-// use my_agent_framework::llm::{LLM, LLMError, OpenAI};
-// use my_agent_framework::memory::{ConversationBufferMemory, Memory};
-// use my_agent_framework::tools::{
-//     calculator::CalculatorTool,
-//     manager::ToolManager,
-//     search::WebSearchTool,
-//     Tool, ToolError,
-// };
 
+// Assuming all modules are correctly declared in lib.rs
+// e.g., in `src/lib.rs`:
+// pub mod agent;
+// pub mod llm;
+// pub mod memory;
+// pub mod primitives;
+// pub mod tools;
+
+use agent_framework::agent::{AgentExecutor, AgentAction, parse_action};
+use agent_framework::llm::{LLM, OpenAI};
+use agent_framework::memory::{ConversationBufferMemory, Memory};
+use agent_framework::tools::{
+    calculator::CalculatorTool,
+    manager::ToolManager,
+    search::WebSearchTool,
+    Tool,
+};
 use std::io::{self, Write};
 
 #[tokio::main]
 async fn main() {
     // Load .env file for API keys
     dotenv::dotenv().ok();
+    println!("AI Agent is initializing...");
 
     // 1. Initialize components
     let llm = Box::new(OpenAI::new(
-        "gpt-4-turbo".to_string(),
+        "gpt-4-turbo".to_string(), // Or your preferred model
         "https://api.openai.com/v1/chat/completions".to_string(),
     ));
 
@@ -1006,10 +1093,13 @@ async fn main() {
         if input.eq_ignore_ascii_case("exit") {
             break;
         }
+        if input.is_empty() {
+            continue;
+        }
 
         match agent.run(input).await {
-            Ok(response) => println!("AI: {}", response),
-            Err(e) => println!("Error: {}", e),
+            Ok(response) => println!("\nAI: {}\n", response),
+            Err(e) => eprintln!("\nError: {}\n", e),
         }
     }
 }

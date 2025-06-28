@@ -6,56 +6,77 @@ Let's begin.
 
 ### **Table of Contents**
 
-  * [Section 1: The Blueprint - Project Initialization and Configuration](#section-1-the-blueprint---project-initialization-and-configuration)
-      * [1. Simple Explanation: Gathering Your Tools and Ingredients](#1-simple-explanation-gathering-your-tools-and-ingredients)
-      * [2. Identify Gaps: The "What Ifs"](#2-identify-gaps-the-what-ifs)
-      * [3. Fill the Gaps: Annotated Setup](#3-fill-the-gaps-annotated-setup)
-      * [4. Refine and Teach Back: The "Configuration-First" Heuristic](#4-refine-and-teach-back-the-configuration-first-heuristic)
-  * [Section 2: The Foundation - Database Architecture and Migrations](#section-2-the-foundation---database-architecture-and-migrations)
-      * [1. Simple Explanation: Building the Database Blueprint](#1-simple-explanation-building-the-database-blueprint)
-      * [2. Identify Gaps: The Importance of Discipline](#2-identify-gaps-the-importance-of-discipline)
-      * [3. Fill the Gaps: Annotated Schema and Migrations](#3-fill-the-gaps-annotated-schema-and-migrations)
-      * [4. Refine and Teach Back: The "Migrations-First" Pattern](#4-refine-and-teach-back-the-migrations-first-pattern)
-  * [Section 3: The Nervous System - Web Server, State, and Webhooks](#section-3-the-nervous-system---web-server-state-and-webhooks)
-      * [1. Simple Explanation: Building the Bot's Brain Stem](#1-simple-explanation-building-the-bots-brain-stem)
-      * [2. Identify Gaps: Connecting the Pieces](#2-identify-gaps-connecting-the-pieces)
-      * [3. Fill the Gaps: Annotated Code and Request Flow](#3-fill-the-gaps-annotated-code-and-request-flow)
-      * [4. Refine and Teach Back: The "Web Service First" Pattern](#4-refine-and-teach-back-the-web-service-first-pattern)
-  * [Section 4: The Conversation - Logic, State Machines, and `dptree`](#section-4-the-conversation---logic-state-machines-and-dptree)
-      * [1. Simple Explanation: Teaching the Bot to Converse](#1-simple-explanation-teaching-the-bot-to-converse)
-      * [2. Identify Gaps: Handling the Flow](#2-identify-gaps-handling-the-flow)
-      * [3. Fill the Gaps: Annotated Logic](#3-fill-the-gaps-annotated-logic)
-      * [4. Refine and Teach Back: The "Chain of Responsibility" Pattern](#4-refine-and-teach-back-the-chain-of-responsibility-pattern)
-  * [Section 5: Persistent Memory - A PostgreSQL-Backed Dialogue Store](#section-5-persistent-memory---a-postgresql-backed-dialogue-store)
-      * [1. Simple Explanation: Giving the Bot a Permanent Diary](#1-simple-explanation-giving-the-bot-a-permanent-diary)
-      * [2. Identify Gaps: The Bridge Between Worlds](#2-identify-gaps-the-bridge-between-worlds)
-      * [3. Fill the Gaps: The `Storage` Trait Implementation](#3-fill-the-gaps-the-storage-trait-implementation)
-      * [4. Refine and Teach Back: The Power of Abstraction](#4-refine-and-teach-back-the-power-of-abstraction)
-  * [Section 6: Advanced Error Handling and Diagnostics](#section-6-advanced-error-handling-and-diagnostics)
-      * [1. Simple Explanation: Building a Robust Reporting System](#1-simple-explanation-building-a-robust-reporting-system)
-      * [2. Identify Gaps: The Journey of an Error](#2-identify-gaps-the-journey-of-an-error)
-      * [3. Fill the Gaps: Implementing a Full Error Handling Pipeline](#3-fill-the-gaps-implementing-a-full-error-handling-pipeline)
-      * [4. Refine and Teach Back: Errors as First-Class Citizens](#4-refine-and-teach-back-errors-as-first-class-citizens)
-  * [Section 7: Integration Testing Our Bot](#section-7-integration-testing-our-bot)
-      * [1. Simple Explanation: Giving Our Bot a Final Exam](#1-simple-explanation-giving-our-bot-a-final-exam)
-      * [2. Identify Gaps: The Challenges of Realistic Testing](#2-identify-gaps-the-challenges-of-realistic-testing)
-      * [3. Fill the Gaps: Building the Test Suite](#3-fill-the-gaps-building-the-test-suite)
-      * [4. Refine and Teach Back: The "Arrange-Act-Assert" Pattern](#4-refine-and-teach-back-the-arrange-act-assert-pattern)
-  * [Section 8: Production Deployment with Docker](#section-8-production-deployment-with-docker)
-      * [1. Simple Explanation: The Universal Shipping Container](#1-simple-explanation-the-universal-shipping-container)
-      * [2. Identify Gaps: The Efficiency Problem](#2-identify-gaps-the-efficiency-problem)
-      * [3. Fill the Gaps: The Multi-Stage Dockerfile](#3-fill-the-gaps-the-multi-stage-dockerfile)
-      * [4. Refine and Teach Back: The "Immutable Infrastructure" Pattern](#4-refine-and-teach-back-the-immutable-infrastructure-pattern)
-  * [Section 9: Automation with CI/CD](#section-9-automation-with-cicd)
-      * [1. Simple Explanation: The Automated Assembly Line](#1-simple-explanation-the-automated-assembly-line)
-      * [2. Identify Gaps: The Assembly Line's Needs](#2-identify-gaps-the-assembly-lines-needs)
-      * [3. Fill the Gaps: A GitHub Actions Workflow](#3-fill-the-gaps-a-github-actions-workflow)
-      * [4. Refine and Teach Back: The "Fail Fast" Principle](#4-refine-and-teach-back-the-fail-fast-principle)
-  * [Section 10: Observability & Production Monitoring](#section-10-observability--production-monitoring)
-      * [1. Simple Explanation: Your Application's Dashboard](#1-simple-explanation-your-applications-dashboard)
-      * [2. Identify Gaps: From Text to Insights](#2-identify-gaps-from-text-to-insights)
-      * [3. Fill the Gaps: Implementing the Pillars of Observability](#3-fill-the-gaps-implementing-the-pillars-of-observability)
-      * [4. Refine and Teach Back: The Three Pillars](#4-refine-and-teach-back-the-three-pillars)
+- [**Architecting a State-Aware Conversational Bot in Rust: A Deep Dive**](#architecting-a-state-aware-conversational-bot-in-rust-a-deep-dive)
+- [**Table of Contents**](#table-of-contents)
+- [**Section 1: The Blueprint - Project Initialization and Configuration**](#section-1-the-blueprint---project-initialization-and-configuration)
+  - [**1. Simple Explanation: Gathering Your Tools and Ingredients**](#1-simple-explanation-gathering-your-tools-and-ingredients)
+  - [**2. Identify Gaps: The "What Ifs"**](#2-identify-gaps-the-what-ifs)
+  - [**3. Fill the Gaps: Annotated Setup**](#3-fill-the-gaps-annotated-setup)
+    - [**The Recipe: `Cargo.toml`**](#the-recipe-cargotoml)
+    - [**The Secrets: `.env` and `.gitignore`**](#the-secrets-env-and-gitignore)
+  - [**4. Refine and Teach Back: The "Configuration-First" Heuristic**](#4-refine-and-teach-back-the-configuration-first-heuristic)
+- [**Section 2: The Foundation - Database Architecture and Migrations**](#section-2-the-foundation---database-architecture-and-migrations)
+  - [**1. Simple Explanation: Building the Database Blueprint**](#1-simple-explanation-building-the-database-blueprint)
+  - [**2. Identify Gaps: The Importance of Discipline**](#2-identify-gaps-the-importance-of-discipline)
+  - [**3. Fill the Gaps: Annotated Schema and Migrations**](#3-fill-the-gaps-annotated-schema-and-migrations)
+    - [**The Database Blueprint (ERD)**](#the-database-blueprint-erd)
+    - [**The Migration Files**](#the-migration-files)
+  - [**4. Refine and Teach Back: The "Migrations-First" Pattern**](#4-refine-and-teach-back-the-migrations-first-pattern)
+- [**Section 3: The Nervous System - Web Server, State, and Webhooks**](#section-3-the-nervous-system---web-server-state-and-webhooks)
+  - [**1. Simple Explanation: Building the Bot's Brain Stem**](#1-simple-explanation-building-the-bots-brain-stem)
+  - [**2. Identify Gaps: Connecting the Pieces**](#2-identify-gaps-connecting-the-pieces)
+  - [**3. Fill the Gaps: Annotated Code and Request Flow**](#3-fill-the-gaps-annotated-code-and-request-flow)
+    - [**Request Flow Visualization**](#request-flow-visualization)
+    - [**The Main Application Entrypoint: `main.rs`**](#the-main-application-entrypoint-mainrs)
+    - [**The Router and Teloxide Integration: `web.rs`**](#the-router-and-teloxide-integration-webrs)
+  - [**4. Refine and Teach Back: The "Web Service First" Pattern**](#4-refine-and-teach-back-the-web-service-first-pattern)
+- [**Section 4: The Conversation - Logic, State Machines, and `dptree`**](#section-4-the-conversation---logic-state-machines-and-dptree)
+  - [**1. Simple Explanation: Teaching the Bot to Converse**](#1-simple-explanation-teaching-the-bot-to-converse)
+  - [**2. Identify Gaps: Handling the Flow**](#2-identify-gaps-handling-the-flow)
+  - [**3. Fill the Gaps: Annotated Logic**](#3-fill-the-gaps-annotated-logic)
+    - [**The FSM and Commands: `bot.rs` (part 1)**](#the-fsm-and-commands-botrs-part-1)
+    - [**The Logic Switchboard: `bot.rs` (part 2 - `command_handler` function)**](#the-logic-switchboard-botrs-part-2---command_handler-function)
+  - [**4. Refine and Teach Back: The "Chain of Responsibility" Pattern**](#4-refine-and-teach-back-the-chain-of-responsibility-pattern)
+- [**Section 5: Persistent Memory - A PostgreSQL-Backed Dialogue Store**](#section-5-persistent-memory---a-postgresql-backed-dialogue-store)
+  - [**1. Simple Explanation: Giving the Bot a Permanent Diary**](#1-simple-explanation-giving-the-bot-a-permanent-diary)
+  - [**2. Identify Gaps: The Bridge Between Worlds**](#2-identify-gaps-the-bridge-between-worlds)
+  - [**3. Fill the Gaps: The `Storage` Trait Implementation**](#3-fill-the-gaps-the-storage-trait-implementation)
+    - [**The `PostgresStorage` struct and `Storage` Trait Implementation**](#the-postgresstorage-struct-and-storage-trait-implementation)
+    - [**Updating `bot.rs` and `web.rs`**](#updating-botrs-and-webrs)
+  - [**4. Refine and Teach Back: The Power of Abstraction**](#4-refine-and-teach-back-the-power-of-abstraction)
+- [**Section 6: Advanced Error Handling and Diagnostics**](#section-6-advanced-error-handling-and-diagnostics)
+  - [**1. Simple Explanation: Building a Robust Reporting System**](#1-simple-explanation-building-a-robust-reporting-system)
+  - [**2. Identify Gaps: The Journey of an Error**](#2-identify-gaps-the-journey-of-an-error)
+  - [**3. Fill the Gaps: Implementing a Full Error Handling Pipeline**](#3-fill-the-gaps-implementing-a-full-error-handling-pipeline)
+    - [**A Production-Ready `AppError`**](#a-production-ready-apperror)
+    - [**Contextual Logging with `tracing`**](#contextual-logging-with-tracing)
+  - [**4. Refine and Teach Back: Errors as First-Class Citizens**](#4-refine-and-teach-back-errors-as-first-class-citizens)
+- [**Section 7: Integration Testing Our Bot**](#section-7-integration-testing-our-bot)
+  - [**1. Simple Explanation: Giving Our Bot a Final Exam**](#1-simple-explanation-giving-our-bot-a-final-exam)
+  - [**2. Identify Gaps: The Challenges of Realistic Testing**](#2-identify-gaps-the-challenges-of-realistic-testing)
+  - [**3. Fill the Gaps: Building the Test Suite**](#3-fill-the-gaps-building-the-test-suite)
+    - [**The Test Harness: `tests/common/mod.rs`**](#the-test-harness-testscommonmodrs)
+    - [**The Exam Questions: `tests/bot_integration_test.rs`**](#the-exam-questions-testsbot_integration_testrs)
+  - [**4. Refine and Teach Back: The "Arrange-Act-Assert" Pattern**](#4-refine-and-teach-back-the-arrange-act-assert-pattern)
+- [**Section 8: Production Deployment with Docker**](#section-8-production-deployment-with-docker)
+  - [**1. Simple Explanation: The Universal Shipping Container**](#1-simple-explanation-the-universal-shipping-container)
+  - [**2. Identify Gaps: The Efficiency Problem**](#2-identify-gaps-the-efficiency-problem)
+  - [**3. Fill the Gaps: The Multi-Stage Dockerfile**](#3-fill-the-gaps-the-multi-stage-dockerfile)
+    - [**Annotated `Dockerfile`**](#annotated-dockerfile)
+  - [**4. Refine and Teach Back: The "Immutable Infrastructure" Pattern**](#4-refine-and-teach-back-the-immutable-infrastructure-pattern)
+- [**Section 9: Automation with CI/CD**](#section-9-automation-with-cicd)
+  - [**1. Simple Explanation: The Automated Assembly Line**](#1-simple-explanation-the-automated-assembly-line)
+  - [**2. Identify Gaps: The Assembly Line's Needs**](#2-identify-gaps-the-assembly-lines-needs)
+  - [**3. Fill the Gaps: A GitHub Actions Workflow**](#3-fill-the-gaps-a-github-actions-workflow)
+    - [**Annotated `.github/workflows/ci.yml`**](#annotated-githubworkflowsciyml)
+  - [**4. Refine and Teach Back: The "Fail Fast" Principle**](#4-refine-and-teach-back-the-fail-fast-principle)
+- [**Section 10: Observability \& Production Monitoring**](#section-10-observability--production-monitoring)
+  - [**1. Simple Explanation: Your Application's Dashboard**](#1-simple-explanation-your-applications-dashboard)
+  - [**2. Identify Gaps: From Text to Insights**](#2-identify-gaps-from-text-to-insights)
+  - [**3. Fill the Gaps: Implementing the Pillars of Observability**](#3-fill-the-gaps-implementing-the-pillars-of-observability)
+    - [**Structured Logging**](#structured-logging)
+    - [**Basic Metrics**](#basic-metrics)
+  - [**4. Refine and Teach Back: The Three Pillars**](#4-refine-and-teach-back-the-three-pillars)
 
 -----
 
@@ -224,7 +245,7 @@ erDiagram
     messages {
         BIGSERIAL id PK "Auto-incrementing ID"
         BIGINT user_id FK
-        BIGINT chat_id
+        TEXT chat_id
         TEXT text
         TIMESTAMPTZ sent_at
     }
@@ -349,6 +370,8 @@ Our approach is to build a robust web service first, and the Telegram bot is sim
 
 ##### **Request Flow Visualization**
 
+This diagram shows how a message from a user flows through our system.
+
 ```mermaid
 sequenceDiagram
     participant Telegram
@@ -357,8 +380,8 @@ sequenceDiagram
     participant TeloxideDispatcher as Teloxide Dispatcher
 
     Telegram->>+AxumRouter: POST /webhook with message update
-    AxumRouter->>+WebhookHandler: Forwards request
-    WebhookHandler->>+TeloxideDispatcher: Passes the update to Teloxide
+    AxumRouter->>+WebhookHandler: Forwards request to Teloxide's route
+    WebhookHandler->>+TeloxideDispatcher: Passes the update to Teloxide's logic tree
     TeloxideDispatcher-->>-WebhookHandler: Processes update (runs command handlers, etc.)
     WebhookHandler-->>-AxumRouter: Returns HTTP 200 OK
     AxumRouter-->>-Telegram: HTTP 200 OK
@@ -563,11 +586,11 @@ pub type HandlerResult = Result<(), teloxide::RequestError>;
 
 ##### **The Logic Switchboard: `bot.rs` (part 2 - `command_handler` function)**
 
-This is the heart of the routing logic.
+This flowchart visualizes the decision-making process inside our `dptree`.
 
 ```mermaid
 graph TD
-    Start --> IsMessage{"Update::filter_message()"};
+    Start[Incoming Update] --> IsMessage{"Update::filter_message()"};
     IsMessage -- Yes --> IsCommand{"teloxide::filter_command()"};
     IsMessage -- No --> Reject1[Discard];
 
@@ -578,17 +601,17 @@ graph TD
     CommandSwitch -- /help --> H_Help[help_command];
     CommandSwitch -- /history --> H_History[history_command];
 
-    CheckState -- State::ReceiveNote --> H_Note[receive_note];
+    CheckState -- State is ReceiveNote --> H_Note[receive_note];
     CheckState -- Any other state --> H_Invalid[invalid_state];
 
-    subgraph "Wrapping Logic"
+    subgraph "Dialogue Management"
       direction LR
       H_Start --> Enter;
       H_Help --> Enter;
       H_History --> Enter;
       H_Note --> Enter;
       H_Invalid --> Enter;
-      Enter(dialogue::enter) --> Final;
+      Enter(dialogue::enter wraps all handlers) --> Final[Handler Logic];
     end
 
     style IsMessage fill:#f9f
@@ -786,6 +809,30 @@ where
 }
 ```
 
+This diagram illustrates how the `dialogue::enter` handler uses our custom `PostgresStorage` implementation behind the scenes.
+
+```mermaid
+sequenceDiagram
+    participant Handler as Your Handler (e.g., start_command)
+    participant Dialogue as MyDialogue
+    participant DpEnter as dialogue::enter
+    participant PgStorage as PostgresStorage
+    participant Database
+
+    DpEnter->>+PgStorage: get_dialogue(chat_id)
+    PgStorage->>+Database: SELECT state_json FROM ...
+    Database-->>-PgStorage: Returns JSON (or NULL)
+    PgStorage-->>-DpEnter: Returns Option<Dialogue<State>>
+    DpEnter->>+Handler: Calls your handler with the loaded dialogue
+    Handler->>+Dialogue: dialogue.update(NewState)
+    Dialogue-->>-Handler: 
+    Handler-->>-DpEnter: Handler finishes
+    DpEnter->>+PgStorage: update_dialogue(chat_id, dialogue)
+    PgStorage->>+Database: INSERT ... ON CONFLICT ...
+    Database-->>-PgStorage: OK
+    PgStorage-->>-DpEnter: 
+```
+
 ##### **Updating `bot.rs` and `web.rs`**
 
 Now, we simply replace `InMemStorage` with our shiny new `PostgresStorage`.
@@ -837,9 +884,9 @@ In any real system, things will go wrong. A database connection might fail, or a
 
 #### **3. Fill the Gaps: Implementing a Full Error Handling Pipeline**
 
-##### **A More Robust `AppError`**
+##### **A Production-Ready `AppError`**
 
-Let's enhance the `AppError` from the original document and make it fully compatible with `axum`.
+Let's create an `AppError` that is fully compatible with `axum` by implementing the `IntoResponse` trait.
 
 ```rust
 // In src/state.rs or a new src/error.rs file
@@ -852,6 +899,8 @@ use axum::{
 use serde_json::json;
 
 // Our unified error type.
+// `#[derive(Debug)]` is useful for logging.
+#[derive(Debug)]
 pub enum AppError {
     SqlxError(sqlx::Error),
     TeloxideRequestError(teloxide::RequestError),
@@ -863,23 +912,24 @@ pub enum AppError {
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         let (status, error_message) = match self {
-            AppError::SqlxError(e) => (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Database error: {}", e),
-            ),
-            AppError::TeloxideRequestError(e) => (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Telegram API error: {}", e),
-            ),
+            AppError::SqlxError(e) => {
+                // Log the full error for debugging, but don't expose it to the client.
+                tracing::error!("Database error: {:?}", e);
+                (
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    "An internal server error occurred".to_string(),
+                )
+            }
+            AppError::TeloxideRequestError(e) => {
+                tracing::error!("Telegram API error: {:?}", e);
+                (
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    "An error occurred while communicating with Telegram".to_string(),
+                )
+            }
         };
 
-        // Log the full error for debugging purposes.
-        tracing::error!("An error occurred: {:?}", error_message);
-
-        // Don't leak detailed internal errors to the user.
-        let body = Json(json!({
-            "error": "An internal server error occurred."
-        }));
+        let body = Json(json!({ "error": error_message }));
 
         (status, body).into_response()
     }
@@ -918,7 +968,7 @@ async fn history_command(
     dialogue: MyDialogue,
     msg: Message,
     db_pool: Arc<PgPool>
-) -> HandlerResult {
+) -> Result<(), AppError> { // Note the return type now uses our AppError
     tracing::info!("Fetching user history."); // This log line will now automatically include `user_id`
 
     let user_id = msg.from().unwrap().id.0;
@@ -958,88 +1008,57 @@ This layered approach ensures that we have rich, detailed information for debugg
 
 Before we send our bot out into the world, we need to make sure it works correctly. Think of this as giving the bot a final exam. We can't just ask it, "Do you work?" We need to create specific test questions that cover everything it's supposed to do.
 
-  * **The Exam Room (`tests/test_app.rs`):** We need a controlled environment to conduct the exam. This file will contain code to spawn a complete, running instance of our application, including its own temporary database, on our computer.
-  * **The Exam Questions (`tests/telegram_bot_api.rs`):** These are the specific test cases. We will write code that pretends to be Telegram, sending mock messages like `/start`, `/history`, and regular text notes to our bot's webhook endpoint.
-  * **Grading the Exam:** After each "question" (test case), we'll check if the bot gave the right answer. This involves checking the HTTP response it sends back and looking directly into the test database to make sure it saved the user's data correctly.
+  * **The Exam Room (`tests/` directory):** We need a controlled environment to conduct the exam. Our integration tests will spawn a complete, running instance of our application, including its own temporary database, on our computer.
+  * **The Exam Questions (Test Cases):** These are the specific test cases. We will write code that pretends to be Telegram, sending mock messages like `/start`, `/history`, and regular text notes to our bot's webhook endpoint.
+  * **Grading the Exam (Assertions):** After each "question" (test case), we'll check if the bot gave the right answer. This involves checking the HTTP response it sends back and looking directly into the test database to make sure it saved the user's data correctly.
 
 This process ensures that any future changes we make don't accidentally break existing functionality.
 
 #### **2. Identify Gaps: The Challenges of Realistic Testing**
 
-  * *How can we run our application for a test without manually starting it every time?* We need a "test harness"-a piece of code that automatically launches the server and provides our test with its address.
+  * *How can we run our application for a test without manually starting it every time?* We need a "test harness"-a piece of code that automatically launches the server on a random port and provides our test with its address.
   * *How do we prevent our tests from interfering with our real development database?* Each test run must create its own unique, isolated database and destroy it afterward. This ensures tests are clean, repeatable, and don't corrupt real data.
   * *How do we simulate a complex incoming message from Telegram?* We need to construct JSON payloads that precisely match the structure Telegram uses for its `Update` objects.
 
 #### **3. Fill the Gaps: Building the Test Suite**
 
-First, create the `tests` directory at the root of your project.
+First, create the `tests` directory at the root of your project and add `reqwest` and `once_cell` to your `[dev-dependencies]` in `Cargo.toml`.
 
 ```
 .
 ├── ...
 ├── src/
 └── tests/
-    ├── helpers/
-    │   ├── mod.rs
-    │   └── utils.rs
-    ├── telegram_bot_api.rs
-    └── test_app.rs
+    ├── common/
+    │   └── mod.rs
+    └── bot_integration_test.rs
 ```
 
-##### **The Test Harness: `tests/test_app.rs`**
+##### **The Test Harness: `tests/common/mod.rs`**
 
 This code is responsible for creating a fully operational, isolated instance of our app for each test run.
 
 ```rust
-// tests/test_app.rs
-use modular_telegram_bot::{run, AppConfig, AppState};
+// tests/common/mod.rs
+use stateful_telegram_bot::web::create_router;
+use stateful_telegram_bot::state::AppState;
 use once_cell::sync::Lazy;
-use reqwest::Client;
-use secrecy::ExposeSecret;
-use sqlx::{Connection, Executor, PgConnection, PgPool};
+use sqlx::{Connection, Executor, PgConnection, PgPool, PgPoolOptions};
 use std::net::TcpListener;
 use uuid::Uuid;
 
-// Ensure `tracing` is only initialized once.
+// Ensure `tracing` is only initialized once for all tests.
 static TRACING: Lazy<()> = Lazy::new(|| {
-    let default_filter = "info,sqlx=warn,tower_http=warn";
-    let subscriber_name = "test";
-    if std::env::var("TEST_LOG").is_ok() {
-        let subscriber = tracing_subscriber::fmt::Subscriber::builder()
-            .with_env_filter(default_filter)
-            .with_subscriber(tracing_subscriber::fmt::layer())
-            .finish();
-        tracing::subscriber::set_global_default(subscriber)
-            .expect("Failed to set global default subscriber");
-    } else {
-        let subscriber = tracing_subscriber::fmt::Subscriber::builder()
-            .with_env_filter(default_filter)
-            .with_writer(std::io::sink)
-            .finish();
-        tracing::subscriber::set_global_default(subscriber)
-            .expect("Failed to set global default subscriber");
-    }
+    let subscriber = tracing_subscriber::fmt::Subscriber::builder()
+        .with_env_filter("info")
+        .with_writer(std::io::sink) // Discard logs during tests
+        .finish();
+    tracing::subscriber::set_global_default(subscriber).expect("Failed to set subscriber");
 });
 
 pub struct TestApp {
     pub address: String,
-    pub client: Client,
     pub db_pool: PgPool,
-    pub config: AppConfig,
-}
-
-impl TestApp {
-    pub async fn post_webhook<Body>(&self, body: &Body) -> reqwest::Response
-    where
-        Body: serde::Serialize,
-    {
-        self.client
-            .post(&format!("{}/api/v1/telegram_bot/webhook", &self.address))
-            .json(body)
-            .send()
-            .await
-            .expect("Failed to execute request.")
-    }
 }
 
 /// Spawns the application in the background and returns a `TestApp` helper.
@@ -1050,138 +1069,79 @@ pub async fn spawn_app() -> TestApp {
     let port = listener.local_addr().unwrap().port();
     let address = format!("http://127.0.0.1:{}", port);
 
-    let mut config = AppConfig::load().expect("Failed to load configuration.");
-    // Create a new, unique database for each test run.
-    config.database_url = configure_database(&config).await.database_url;
-
-    let app_state = AppState::new(config.clone())
-        .await
-        .expect("Failed to create AppState");
-
-    let db_pool = app_state.db_pool.clone();
-
-    let server = run(app_state);
-    tokio::spawn(server);
-
-    let client = Client::new();
-
-    TestApp {
-        address,
-        client,
-        db_pool,
-        config,
-    }
-}
-
-/// Creates a unique database for the test run and migrates it.
-async fn configure_database(config: &AppConfig) -> AppConfig {
+    let mut base_db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let db_name = Uuid::new_v4().to_string();
-    let mut connection =
-        PgConnection::connect_lazy(config.database_url.expose_secret()).unwrap();
-    connection
-        .execute(format!(r#"CREATE DATABASE "{}";"#, db_name).as_str())
-        .await
-        .expect("Failed to create database.");
+    
+    // Create a new, unique database for the test run.
+    let mut connection = PgConnection::connect(&base_db_url).await.expect("Failed to connect to Postgres");
+    connection.execute(format!(r#"CREATE DATABASE "{}";"#, db_name).as_str()).await.expect("Failed to create database.");
 
-    let database_url = format!("{}/{}", config.database_url.expose_secret(), db_name);
-    let mut new_config = config.clone();
-    new_config.database_url = database_url.into();
+    // Connect to the new database and run migrations.
+    base_db_url.push_str(&format!("/{}", db_name));
+    let db_pool = PgPoolOptions::new().connect(&base_db_url).await.expect("Failed to connect to test DB");
+    sqlx::migrate!("./migrations").run(&db_pool).await.expect("Failed to migrate database");
 
-    let pool = PgPool::connect(&new_config.database_url.expose_secret())
-        .await
-        .expect("Failed to connect to new database.");
-    sqlx::migrate!("./migrations")
-        .run(&pool)
-        .await
-        .expect("Failed to migrate the database");
+    let app_state = AppState { db_pool: db_pool.clone() };
+    let app = create_router(app_state);
 
-    new_config
+    tokio::spawn(async move {
+        axum::serve(listener, app.into_make_service()).await.unwrap();
+    });
+
+    TestApp { address, db_pool }
 }
 ```
 
-##### **Test Helpers: `tests/helpers/mod.rs` and `tests/helpers/utils.rs`**
-
-These files organize our test utilities.
-
-```rust
-// tests/helpers/mod.rs
-pub mod utils;
-```
-
-```rust
-// tests/helpers/utils.rs
-use serde_json::{json, Value};
-
-/// Creates a mock Telegram `Update` JSON payload for a text message.
-pub fn create_mock_message_update(user_id: i64, chat_id: i64, text: &str) -> Value {
-    json!({
-        "update_id": rand::random::<u32>(),
-        "message": {
-            "message_id": rand::random::<u32>(),
-            "date": 1678886400,
-            "chat": {
-                "id": chat_id,
-                "type": "private",
-                "first_name": "Test",
-                "last_name": "User",
-                "username": "testuser"
-            },
-            "from": {
-                "id": user_id,
-                "is_bot": false,
-                "first_name": "Test",
-                "last_name": "User",
-                "username": "testuser"
-            },
-            "text": text
-        }
-    })
-}
-```
-
-##### **The Exam Questions: `tests/telegram_bot_api.rs`**
+##### **The Exam Questions: `tests/bot_integration_test.rs`**
 
 Here we write the actual tests to verify our bot's logic.
 
 ```rust
-// tests/telegram_bot_api.rs
-mod helpers;
-mod test_app;
+// tests/bot_integration_test.rs
+mod common;
 
-use crate::helpers::utils::create_mock_message_update;
-use crate::test_app::spawn_app;
+use crate::common::spawn_app;
+use serde_json::{json, Value};
+
+/// Creates a mock Telegram `Update` JSON payload for a text message.
+fn create_mock_message_update(user_id: i64, chat_id: i64, text: &str) -> Value {
+    json!({
+        "update_id": 1,
+        "message": {
+            "message_id": 1,
+            "date": 1678886400,
+            "chat": { "id": chat_id, "type": "private", "first_name": "Test", "username": "testuser" },
+            "from": { "id": user_id, "is_bot": false, "first_name": "Test", "username": "testuser" },
+            "text": text
+        }
+    })
+}
 
 #[tokio::test]
 async fn test_start_command_welcomes_user_and_sets_state() {
     // Arrange
     let app = spawn_app().await;
+    let client = reqwest::Client::new();
     let user_id = 101;
     let chat_id = 202;
     let update_payload = create_mock_message_update(user_id, chat_id, "/start");
+    let webhook_url = format!("{}/webhook", app.address);
 
     // Act
-    let response = app.post_webhook(&update_payload).await;
+    let response = client.post(&webhook_url).json(&update_payload).send().await.expect("Failed to execute request.");
 
     // Assert
-    assert_eq!(response.status(), 200);
+    assert_eq!(response.status().as_u16(), 200);
 
     // Check the database to see if the user was created
     let saved_user = sqlx::query!("SELECT id, first_name FROM users WHERE id = $1", user_id)
-        .fetch_optional(&app.db_pool)
-        .await
-        .expect("Failed to fetch from DB.")
-        .unwrap();
+        .fetch_optional(&app.db_pool).await.expect("Failed to fetch from DB.").unwrap();
     assert_eq!(saved_user.id, user_id);
     assert_eq!(saved_user.first_name, "Test");
 
     // Check the database to see if the dialogue state was updated
-    let saved_state: (serde_json::Value,) = sqlx::query_as(
-        "SELECT state_json FROM dialogue_states WHERE chat_id = $1",
-    )
-    .bind(chat_id)
-    .fetch_one(&app.db_pool)
-    .await
-    .expect("Failed to fetch state from DB.");
+    let saved_state: (serde_json::Value,) = sqlx::query_as("SELECT state_json FROM dialogue_states WHERE chat_id = $1")
+        .bind(chat_id).fetch_one(&app.db_pool).await.expect("Failed to fetch state from DB.");
     // "ReceiveNote" is the state after /start
     assert_eq!(saved_state.0.to_string(), r#""ReceiveNote""#);
 }
@@ -1190,38 +1150,33 @@ async fn test_start_command_welcomes_user_and_sets_state() {
 async fn test_receive_note_saves_message_and_keeps_state() {
     // Arrange
     let app = spawn_app().await;
+    let client = reqwest::Client::new();
     let user_id = 102;
     let chat_id = 203;
+    let webhook_url = format!("{}/webhook", app.address);
 
     // 1. Send /start to set the initial state to ReceiveNote
     let start_payload = create_mock_message_update(user_id, chat_id, "/start");
-    app.post_webhook(&start_payload).await;
+    client.post(&webhook_url).json(&start_payload).send().await.unwrap();
 
-    // 2. Send a note
+    // 2. Prepare the note message
     let note_text = "This is my first note.";
     let note_payload = create_mock_message_update(user_id, chat_id, note_text);
 
     // Act
-    let response = app.post_webhook(&note_payload).await;
+    let response = client.post(&webhook_url).json(&note_payload).send().await.expect("Failed to execute request.");
 
     // Assert
-    assert_eq!(response.status(), 200);
+    assert_eq!(response.status().as_u16(), 200);
 
     // Check that the message was saved to the database
     let saved_message = sqlx::query!("SELECT text FROM messages WHERE user_id = $1", user_id)
-        .fetch_one(&app.db_pool)
-        .await
-        .expect("Failed to fetch message from DB.");
+        .fetch_one(&app.db_pool).await.expect("Failed to fetch message from DB.");
     assert_eq!(saved_message.text, note_text);
-
+    
     // Check that the state is still ReceiveNote
-    let saved_state: (serde_json::Value,) = sqlx::query_as(
-        "SELECT state_json FROM dialogue_states WHERE chat_id = $1",
-    )
-    .bind(chat_id)
-    .fetch_one(&app.db_pool)
-    .await
-    .expect("Failed to fetch state from DB.");
+    let saved_state: (serde_json::Value,) = sqlx::query_as("SELECT state_json FROM dialogue_states WHERE chat_id = $1")
+        .bind(chat_id).fetch_one(&app.db_pool).await.expect("Failed to fetch state from DB.");
     assert_eq!(saved_state.0.to_string(), r#""ReceiveNote""#);
 }
 ```
@@ -1297,10 +1252,10 @@ FROM gcr.io/distroless/cc-static
 
 # Copy only the compiled application binary from the builder stage.
 # We don't copy the source code, the Rust compiler, or anything else.
-COPY --from=builder /usr/src/app/target/release/modular_telegram_bot /usr/local/bin/modular_telegram_bot
+COPY --from=builder /usr/src/app/target/release/stateful_telegram_bot /usr/local/bin/stateful_telegram_bot
 
 # Set the command to run when the container starts.
-CMD ["/usr/local/bin/modular_telegram_bot"]
+CMD ["/usr/local/bin/stateful_telegram_bot"]
 ```
 
   * **Handling Secrets:** When you run this container in production, you don't use a `.env` file. Instead, you inject environment variables directly into the running container. Most cloud providers have a secure way to manage these.
@@ -1376,7 +1331,7 @@ jobs:
         env:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: telegram_bot_db
+          POSTGRES_DB: bot_db
         ports:
           - 5432:5432 # Map the port to the runner
         # This option is crucial to ensure the DB is ready before tests start.
@@ -1396,12 +1351,13 @@ jobs:
     - name: Run Migrations
       # The DATABASE_URL here points to the service container we just defined.
       env:
-        DATABASE_URL: "postgres://user:password@localhost:5432/telegram_bot_db"
+        DATABASE_URL: "postgres://user:password@localhost:5432/bot_db"
       run: sqlx migrate run
 
     - name: Run Tests
       env:
-        DATABASE_URL: "postgres://user:password@localhost:5432/telegram_bot_db"
+        DATABASE_URL: "postgres://user:password@localhost:5432/bot_db"
+        TELOXIDE_TOKEN: "fake_token" # Needed for tests
       run: cargo test
 
     - name: Check Formatting
@@ -1448,33 +1404,24 @@ Observability is about building a dashboard for your running application.
 
 ##### **Structured Logging**
 
-We can modify our `utils.rs` (or `main.rs`) to enable JSON logging in production.
+We can modify our `main.rs` to enable JSON logging in production.
 
 ```rust
-// In src/utils.rs
+// In src/main.rs inside main()
 
-pub fn init_tracing() {
-    let env_filter = tracing_subscriber::EnvFilter::try_from_default_env()
-        .unwrap_or_else(|_| "info,tower_http=debug".into());
-
-    // In production, you might set a `LOG_FORMAT=json` environment variable.
-    let use_json_format = std::env::var("LOG_FORMAT").map_or(false, |v| v == "json");
-
-    let subscriber = tracing_subscriber::registry().with(env_filter);
-
-    if use_json_format {
-        let fmt_layer = tracing_subscriber::fmt::layer().json();
-        subscriber.with(fmt_layer).init();
-    } else {
-        let fmt_layer = tracing_subscriber::fmt::layer().pretty();
-        subscriber.with(fmt_layer).init();
-    }
+// ...
+// In production, you might set a `LOG_FORMAT=json` environment variable.
+if std::env::var("LOG_FORMAT").unwrap_or_default() == "json" {
+    tracing_subscriber::fmt().json().init();
+} else {
+    tracing_subscriber::fmt::init();
 }
+// ...
 ```
 
 ##### **Basic Metrics**
 
-Adding metrics can be done with crates like `prometheus` or `metrics`. Here’s a conceptual example of how you would modify a handler to track a metric.
+Adding metrics can be done with crates like `prometheus` and `lazy_static`. Here’s a conceptual example of how you would modify a handler to track a metric.
 
 ```rust
 // Add `prometheus` and `lazy_static` to Cargo.toml

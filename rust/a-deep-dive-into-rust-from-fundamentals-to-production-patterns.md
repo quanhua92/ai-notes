@@ -112,6 +112,25 @@ impl User {
 ***Insight: Data-First Design and Memory Layout***
 *Unlike classes in many object-oriented languages, Rust's structs separate data definition (`struct`) from behavior definition (`impl`). This emphasizes that a type's primary role is to describe the shape of data. The data for a struct is stored contiguously in memory. For our `User` struct, the `active: bool` field will be stored directly. However, `username: String` and `email: String` are more complex. A `String` is itself a struct containing a pointer to data on the heap, a capacity, and a length. So, the `User` struct itself will be relatively small and live on the stack (by default), but it will hold pointers to the larger string data allocated on the heap.*
 
+```mermaid
+graph TD
+    subgraph Stack
+        direction LR
+        UserStruct["User {<br/>username: ptr_A,<br/>email: ptr_B,<br/>active: true<br/>}"]
+    end
+
+    subgraph Heap
+        direction TB
+        HeapDataA["String data: 'someusername123'"]
+        HeapDataB["String data: 'someone@example.com'"]
+    end
+
+    UserStruct -- "ptr_A" --> HeapDataA
+    UserStruct -- "ptr_B" --> HeapDataB
+
+    style UserStruct fill:#ccffcc
+```
+
 #### **Refine and Teach Back: The Cohesive Module**
 
 A `struct` is Rust's primary way to create custom, composite data types. It defines the "shape" of your data. Through `impl` blocks, methods can be associated with the struct, defining behaviors that operate on that data. This combination of data and behavior creates a cohesive, encapsulated module, forming the fundamental building block for modeling complex entities in a Rust program.
@@ -309,9 +328,15 @@ graph TD
     subgraph "Trait Object: Box<dyn Summary>"
         FatPtr["Fat Pointer"] --> DataPtr["Data Pointer<br/>(points to Tweet on heap)"];
         FatPtr --> VTablePtr["VTable Pointer<br/>(points to Summary's vtable for Tweet)"];
-        VTablePtr --> SummarizeFunc["Pointer to Tweet's summarize function"];
-        VTablePtr --> OtherFunc["...other trait methods..."];
     end
+    
+    subgraph "VTable for Summary on Tweet"
+        VTable["VTable"] --> SummarizeFunc["Pointer to Tweet::summarize()"];
+        VTable --> OtherFunc["...other trait methods..."];
+    end
+    
+    VTablePtr --> VTable
+
     style FatPtr fill:#ccffcc
 ```
 
@@ -436,7 +461,7 @@ graph TD
         main_can_see_connect["main.rs can access crate::network::connect"];
         main_can_see_listen["main.rs can access crate::network::server::listen"];
         main_cannot_see_private["main.rs CANNOT access private_helper"];
-        listen_can_see_private["listen CAN access private_helper"];
+        listen_can_see_private["listen() CAN access private_helper()"];
     end
 
     style F fill:#ffcccc
@@ -812,7 +837,7 @@ Design patterns are reusable solutions to common problems. While many classic pa
         }
         ```
 
-  * **Heuristic to Teach:** **Use `thiserror` for libraries, `anyhow` for applications.** This provides structured, typed errors for library consumers while offering convenience and simplicity for application authors.
+  * **Heuristic to Teach:** **Use `thiserror` for libraries, `anyhow` for applications.** This provides structured, typed errors for library consumers while offering convenience and simplicity for application authors. The reasoning is simple: libraries must provide callers with specific, typed error information so they can make programmatic decisions. Applications, on the other hand, typically just need to report the error and terminate, making a general-purpose, easy-to-use error type ideal.
 
 -----
 
