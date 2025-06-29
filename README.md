@@ -34,6 +34,13 @@ All guides are structured using the Feynman learning method to build deep, intui
       * *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
   * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./llm/mastering-pytorch-for-llms.md)
       * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
+
+### Observability
+
+  * [A Comprehensive Guide to Production-Grade Monitoring with Grafana, Prometheus, and Loki](./observability/a-comprehensive-guide-to-production-grade-monitoring-with-grafana-prometheus-and-loki.md)
+      * *Core Concepts: PLG Stack, Shared Label Philosophy, Metrics & Logs Correlation, Docker Compose, Production Readiness (Security, HA, Performance), Alerting Philosophy, OpenTelemetry.*
+      
+
 ### PostgreSQL
 
   * [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
