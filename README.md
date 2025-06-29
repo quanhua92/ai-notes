@@ -10,7 +10,11 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### AI Agents
 
-  * [Building a Performant AI Agent Framework in Rust from Scratch](./ai_agents/rust-ai-agent-framework-from-scratch.md)  
+  * [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./ai_agents/rust-multimodel-ai-agents.md)
+      * *Core Concepts: Rust for AI, ReAct Loop, Model Context Protocol (MCP), Four Pillars (Axum, Qdrant, Tokio, Tracing), Fearless Concurrency.*
+  * [Kubrick Course Learning Guide to Multimodal AI Systems](./ai_agents/kubrick-course-learning-guide.md)
+      * *Core Concepts: Multimodal Agents, Model Context Protocol (MCP), Four Pillars (Pixeltable, FastMCP, Groq, Opik), Multi-Agent Collaboration, Observability.*
+  * [Building a Performant AI Agent Framework in Rust from Scratch](./ai_agents/rust-ai-agent-framework-from-scratch.md)
       * *Core Concepts: ReAct Paradigm, Modular Design (Traits), Tool Use, State Management, Async Orchestration.*
 
 
@@ -24,15 +28,16 @@ All guides are structured using the Feynman learning method to build deep, intui
   * [Technical Deep Dive: Kafka Consumer Fault Tolerance and Rebalancing](./kafka/kafka-consumer-fault-tolerance-and-rebalancing.md)
       * *Core Concepts: Fault Tolerance, At-Least-Once Delivery, Rebalancing, Idempotency, Dead Letter Queues (DLQ).*
 
+### LLM
+
+  * [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./llm/llm-reverse-engineering.md)
+      * *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
+  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./llm/mastering-pytorch-for-llms.md)
+      * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
 ### PostgreSQL
 
   * [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
       * *Core Concepts: Architecture (MVCC, WAL), SQL Mastery, Performance Engineering (`EXPLAIN`, Indexing), Row-Level Security (RLS).*
-
-### PyTorch
-
-  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./pytorch/mastering-pytorch-for-llms.md)
-      * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
 
 ### React
 

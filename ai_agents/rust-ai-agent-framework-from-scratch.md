@@ -1,8 +1,9 @@
 # Building a Performant AI Agent Framework in Rust from Scratch
 
-**Table of Contents**
+## Table of Contents
 
 - [Building a Performant AI Agent Framework in Rust from Scratch](#building-a-performant-ai-agent-framework-in-rust-from-scratch)
+  - [Table of Contents](#table-of-contents)
   - [Introduction: The Case for a Modern Agent Framework in Rust](#introduction-the-case-for-a-modern-agent-framework-in-rust)
     - [The Rust Advantage: Why Performance, Safety, and Concurrency Matter for AI Systems](#the-rust-advantage-why-performance-safety-and-concurrency-matter-for-ai-systems)
     - [Core Principles of Our Framework: A Synthesis of Modularity, ReAct, and Extensibility](#core-principles-of-our-framework-a-synthesis-of-modularity-react-and-extensibility)
@@ -235,7 +236,7 @@ sequenceDiagram
         else Finish Action
             AgentExecutor->>Memory: Saves user input and final AI response
             AgentExecutor-->>User: Returns the final answer
-            break
+            Note over AgentExecutor,User: This marks the end of the ReAct cycle
         end
     end
 ```
@@ -930,7 +931,7 @@ sequenceDiagram
             AgentExecutor->>+Memory: add_message(AI, answer)
             Memory-->>-AgentExecutor: ack
             AgentExecutor-->>-User: Ok(answer)
-            break
+            Note over AgentExecutor,User: This marks the end of the ReAct cycle
         else Parse Failure
             AgentExecutor->>AgentExecutor: Append error message to scratchpad
         end
