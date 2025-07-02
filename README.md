@@ -10,56 +10,56 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### AI Agents
 
-  * [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./ai_agents/rust-multimodel-ai-agents.md)
+  * [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./technical_guides/ai_agents/rust-multimodel-ai-agents.md)
       * *Core Concepts: Rust for AI, ReAct Loop, Model Context Protocol (MCP), Four Pillars (Axum, Qdrant, Tokio, Tracing), Fearless Concurrency.*
-  * [Kubrick Course Learning Guide to Multimodal AI Systems](./ai_agents/kubrick-course-learning-guide.md)
+  * [Kubrick Course Learning Guide to Multimodal AI Systems](./technical_guides/ai_agents/kubrick-course-learning-guide.md)
       * *Core Concepts: Multimodal Agents, Model Context Protocol (MCP), Four Pillars (Pixeltable, FastMCP, Groq, Opik), Multi-Agent Collaboration, Observability.*
-  * [Building a Performant AI Agent Framework in Rust from Scratch](./ai_agents/rust-ai-agent-framework-from-scratch.md)
+  * [Building a Performant AI Agent Framework in Rust from Scratch](./technical_guides/ai_agents/rust-ai-agent-framework-from-scratch.md)
       * *Core Concepts: ReAct Paradigm, Modular Design (Traits), Tool Use, State Management, Async Orchestration.*
 
 
 ### CSS
 
-  * [The Complete Guide to Mastering Tailwind CSS: From Foundations to v4 Production Mastery](./css/the-complete-guide-to-mastering-tailwind-css.md)
+  * [The Complete Guide to Mastering Tailwind CSS: From Foundations to v4 Production Mastery](./technical_guides/css/the-complete-guide-to-mastering-tailwind-css.md)
       * *Core Concepts: Utility-First Philosophy, JIT Compilation, Oxide Engine (v4), CSS-First Configuration (`@theme`), Semantic Tokens, Container Queries.*
 
 ### Kafka
 
-  * [Technical Deep Dive: Kafka Consumer Fault Tolerance and Rebalancing](./kafka/kafka-consumer-fault-tolerance-and-rebalancing.md)
+  * [Technical Deep Dive: Kafka Consumer Fault Tolerance and Rebalancing](./technical_guides/kafka/kafka-consumer-fault-tolerance-and-rebalancing.md)
       * *Core Concepts: Fault Tolerance, At-Least-Once Delivery, Rebalancing, Idempotency, Dead Letter Queues (DLQ).*
 
 ### LLM
 
-  * [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./llm/llm-reverse-engineering.md)
+  * [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./technical_guides/llm/llm-reverse-engineering.md)
       * *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
-  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./llm/mastering-pytorch-for-llms.md)
+  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./technical_guides/llm/mastering-pytorch-for-llms.md)
       * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
 
 ### Observability
 
-  * [A Comprehensive Guide to Production-Grade Monitoring with Grafana, Prometheus, and Loki](./observability/a-comprehensive-guide-to-production-grade-monitoring-with-grafana-prometheus-and-loki.md)
+  * [A Comprehensive Guide to Production-Grade Monitoring with Grafana, Prometheus, and Loki](./technical_guides/observability/a-comprehensive-guide-to-production-grade-monitoring-with-grafana-prometheus-and-loki.md)
       * *Core Concepts: PLG Stack, Shared Label Philosophy, Metrics & Logs Correlation, Docker Compose, Production Readiness (Security, HA, Performance), Alerting Philosophy, OpenTelemetry.*
       
 
 ### PostgreSQL
 
-  * [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
+  * [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./technical_guides/postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
       * *Core Concepts: Architecture (MVCC, WAL), SQL Mastery, Performance Engineering (`EXPLAIN`, Indexing), Row-Level Security (RLS).*
 
 ### React
 
-  * [The Modern React Stack: A Feynman Guide from First Principles to Production](./react/the-modern-react-stack-a-feynman-guide-from-first-principles-to-production.md)
+  * [The Modern React Stack: A Feynman Guide from First Principles to Production](./technical_guides/react/the-modern-react-stack-a-feynman-guide-from-first-principles-to-production.md)
       * *Core Concepts: TanStack Router, TanStack Query, Zustand, Zod, Type-Safe Patterns.*
 
 ### Rust
 
-  * [A Deep Dive into Rust: From Fundamentals to Production Patterns](./rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
+  * [A Deep Dive into Rust: From Fundamentals to Production Patterns](./technical_guides/rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
       * *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
 
-  * [Architecting a State-Aware Conversational Bot in Rust: A Deep Dive](./rust/architecting-a-state-aware-conversational-bot.md)
+  * [Architecting a State-Aware Conversational Bot in Rust: A Deep Dive](./technical_guides/rust/architecting-a-state-aware-conversational-bot.md)
       * *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
 
-  * [Type-Safe Full-Stack Development: Bridging Rust and TypeScript with Schemas](./rust/type-safe-full-stack-development-rust-typescript.md)
+  * [Type-Safe Full-Stack Development: Bridging Rust and TypeScript with Schemas](./technical_guides/rust/type-safe-full-stack-development-rust-typescript.md)
       * *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 -----
 
