@@ -63,6 +63,14 @@ All guides are structured using the Feynman learning method to build deep, intui
       * *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 -----
 
+## 📚 Content Summaries
+
+### Personal Finance
+  * [Financial Literacy for Dummies (Like Me) with JL Collins](./content_summaries/personal_finance/financial-literacy-with-jl-collins.md)
+      * *Core Concepts: The Simple Path to Wealth, Spend Less Than You Earn, Index Fund Investing (VTSAX), Avoiding Debt, Financial Independence (FI), F.U. Money, Market Crashes.*
+
+-----
+
 ## 🛠️ Prompt Engineering Templates
 
   * **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams.
