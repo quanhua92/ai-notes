@@ -8,15 +8,20 @@ Exploring ideas, prompts, and personal insights from curious conversations with 
 
 All guides are structured using the Feynman learning method to build deep, intuitive understanding of complex systems. 
 
-### AI Agents
+### AI
 
-  * [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./technical_guides/ai_agents/rust-multimodel-ai-agents.md)
-      * *Core Concepts: Rust for AI, ReAct Loop, Model Context Protocol (MCP), Four Pillars (Axum, Qdrant, Tokio, Tracing), Fearless Concurrency.*
-  * [Kubrick Course Learning Guide to Multimodal AI Systems](./technical_guides/ai_agents/kubrick-course-learning-guide.md)
-      * *Core Concepts: Multimodal Agents, Model Context Protocol (MCP), Four Pillars (Pixeltable, FastMCP, Groq, Opik), Multi-Agent Collaboration, Observability.*
-  * [Building a Performant AI Agent Framework in Rust from Scratch](./technical_guides/ai_agents/rust-ai-agent-framework-from-scratch.md)
+  * [Building a Performant AI Agent Framework in Rust from Scratch](./technical_guides/ai/rust-ai-agent-framework-from-scratch.md)
       * *Core Concepts: ReAct Paradigm, Modular Design (Traits), Tool Use, State Management, Async Orchestration.*
-
+  * [Kubrick Course Learning Guide to Multimodal AI Systems](./technical_guides/ai/kubrick-course-learning-guide.md)
+      * *Core Concepts: Multimodal Agents, Model Context Protocol (MCP), Four Pillars (Pixeltable, FastMCP, Groq, Opik), Multi-Agent Collaboration, Observability.*
+  * [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./technical_guides/ai/llm-reverse-engineering.md)
+      * *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
+  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./technical_guides/ai/mastering-pytorch-for-llms.md)
+      * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
+  * [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./technical_guides/ai/rust-multimodel-ai-agents.md)
+      * *Core Concepts: Rust for AI, ReAct Loop, Model Context Protocol (MCP), Four Pillars (Axum, Qdrant, Tokio, Tracing), Fearless Concurrency.*
+  * [The Engineer's Guide to Production-Ready Generative AI](./technical_guides/ai/the-engineer-guide-to-production-ready-generative-ai.md)
+      * *Core Concepts: AI Engineering, Transformers, Attention Mechanism, Prompt Engineering, RAG (Retrieval-Augmented Generation), AI Agents, LLMOps, LLM-as-a-Judge.*
 
 ### CSS
 
@@ -30,10 +35,6 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### LLM
 
-  * [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./technical_guides/llm/llm-reverse-engineering.md)
-      * *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
-  * [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./technical_guides/llm/mastering-pytorch-for-llms.md)
-      * *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
 
 ### Observability
 
