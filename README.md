@@ -4,6 +4,13 @@ Exploring ideas, prompts, and personal insights from curious conversations with 
 
 -----
 
+## 🗺️ Learning Paths
+
+*   [The Rust-Powered Architect: A Modern Path from Backend to AI](./learning_paths/the-rust-powered-architect.md)
+    *   *Core Concepts: Structured Learning Path, Feynman Technique, Full-Stack Architecture, Backend (Rust, Postgres), Frontend (React), Infrastructure (Kafka, Observability), AI Engineering (RAG, Agents).*
+
+-----
+
 ## 🚀 In-Depth Technical Guides
 
 All guides are structured using the Feynman learning method to build deep, intuitive understanding of complex systems. 
