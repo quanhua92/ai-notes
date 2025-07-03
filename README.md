@@ -52,10 +52,13 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### React
 
- *   [The Modern React Stack: A Feynman Guide from First Principles to Production](./technical_guides/react/the-modern-react-stack-a-feynman-guide-from-first-principles-to-production.md)     
+*   [The Modern React Stack: A Feynman Guide from First Principles to Production](./technical_guides/react/the-modern-react-stack-a-feynman-guide-from-first-principles-to-production.md)     
      *   *Core Concepts: TanStack Router, TanStack Query, Zustand, Zod, Type-Safe Patterns.*
 
 ### Rust
+
+*   [10 Essential Rust Patterns for Robust Code](./technical_guides/rust/10-essential-rust-patterns-for-robust-code.md)
+    *   *Core Concepts: RAII, Result Pattern, Builder Pattern, Newtype, Typestate, Dynamic Dispatch, Send/Sync, GATs.*
 
 *   [A Deep Dive into Rust: From Fundamentals to Production Patterns](./technical_guides/rust/a-edep-dive-into-rust-from-fundamentals-to-production-patterns.md)
     *   *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*

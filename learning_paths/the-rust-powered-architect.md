@@ -108,18 +108,22 @@ graph TD
 ```
 
 **Questions & Answers:**
-*   **Q:** Why is Rust's "fearless concurrency" so important?
-    *   **A:** The borrow checker's rules apply across threads, meaning that if your concurrent code compiles, it is guaranteed to be free from data races. This allows you to write complex parallel and asynchronous code with a high degree of confidence, a task that is notoriously difficult and error-prone in other systems languages.
-*   **Q:** What is the "Type State Pattern"?
-    *   **A:** It's a powerful technique that uses Rust's type system to encode the state of an object. For example, you can have a `DraftPost` struct that can only become a `PublishedPost` struct by calling a specific method. This makes invalid state transitions a compile-time error, creating incredibly robust state machines.
-*   **Q:** What is a "zero-cost abstraction"?
-    *   **A:** It's a core philosophy of Rust. It means you can write high-level, elegant code using features like traits or iterators, and the compiler will optimize it down to machine code that is just as fast as if you had written low-level, manual code. You don't pay a performance penalty for writing safer, more expressive code.
-*   **Q:** What is the difference between `String` and `&str`?
-    *   **A:** This is a classic concept that reveals the power of the ownership system. A `String` is an owned, heap-allocated, growable buffer of text. You have full control over it. A `&str` (a "string slice") is a "borrowed" view into some string data that could be part of a `String` or a string literal in your code. It doesn't own the data, it just points to it, making it very efficient to pass around. Understanding this distinction is key to writing idiomatic Rust.
+
+  * **Q:** Why is Rust's "fearless concurrency" so important?
+      * **A:** The borrow checker's rules apply across threads, meaning that if your concurrent code compiles, it is guaranteed to be free from data races. This allows you to write complex parallel and asynchronous code with a high degree of confidence, a task that is notoriously difficult and error-prone in other systems languages.
+  * **Q:** What is the "Type State Pattern"?
+      * **A:** It's a powerful technique that uses Rust's type system to encode the state of an object. For example, you can have a `DraftPost` struct that can only become a `PublishedPost` struct by calling a specific method. This makes invalid state transitions a compile-time error, creating incredibly robust state machines.
+  * **Q:** What is a "zero-cost abstraction"?
+      * **A:** It's a core philosophy of Rust. It means you can write high-level, elegant code using features like traits or iterators, and the compiler will optimize it down to machine code that is just as fast as if you had written low-level, manual code. You don't pay a performance penalty for writing safer, more expressive code.
+  * **Q:** What is the difference between `String` and `&str`?
+      * **A:** This is a classic concept that reveals the power of the ownership system. A `String` is an owned, heap-allocated, growable buffer of text. You have full control over it. A `&str` (a "string slice") is a "borrowed" view into some string data that could be part of a `String` or a string literal in your code. It doesn't own the data, it just points to it, making it very efficient to pass around. Understanding this distinction is key to writing idiomatic Rust.
 
 **Your Path:**
-1.  Begin with a comprehensive overview of the language, from its core data types to its powerful concurrency models and idiomatic design patterns.
-    *   **Study Guide:** [A Deep Dive into Rust: From Fundamentals to Production Patterns](../technical_guides/rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
+
+1.  Begin with a comprehensive overview of the language, from its core data types to its powerful concurrency models.
+      * **Study Guide:** [A Deep Dive into Rust: From Fundamentals to Production Patterns](../technical_guides/rust/a-deep-dive-into-rust-from-fundamentals-to-production-patterns.md)
+2.  Next, solidify your understanding by exploring a curated list of idiomatic design patterns that leverage the compiler for maximum safety and efficiency.
+      * **Study Guide:** [10 Essential Rust Patterns for Robust Code](./technical_guides/rust/10-essential-rust-patterns-for-robust-code.md)
 
 ### Chapter 2: Mastering PostgreSQL
 
