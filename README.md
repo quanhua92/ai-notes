@@ -63,10 +63,10 @@ All guides are structured using the Feynman learning method to build deep, intui
 *   [A Deep Dive into Rust: From Fundamentals to Production Patterns](./technical_guides/rust/a-edep-dive-into-rust-from-fundamentals-to-production-patterns.md)
     *   *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
 
-*   [Architecting a State-Aware Conversational Bot in Rust: A Deep Dive](./technical_guides/rust/architecting-a-state-aware-conversational-bot.md)
+*   [Building Production-Ready Telegram Bots in Rust: From Zero to Deployment](./technical_guides/rust/building-production-ready-telegram-bots-in-rust-from-zero-to-deployment.md)
     *   *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
 
-*   [Type-Safe Full-Stack Development: Bridging Rust and TypeScript with Schemas](./technical_guides/rust/type-safe-full-stack-development-rust-typescript.md)
+*   [Building Production-Ready Telegram Bots in Rust: From Zero to Deployment](./technical_guides/rust/type-safe-full-stack-development-rust-typescript.md)
     *   *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 -----
 

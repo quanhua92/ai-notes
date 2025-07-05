@@ -175,7 +175,7 @@ graph TD
 
 ### Chapter 3: Building a Stateful Application
 
-**Introduction:** Now, let's combine our knowledge of Rust and databases to build a practical, real-world application: a state-aware conversational bot. This project will solidify your understanding of how to architect a system with persistent state.
+**Introduction:** Now, let's combine our knowledge of Rust and databases to build a practical, real-world application: a Production-Ready Telegram Bots in Rust. This project will solidify your understanding of how to architect a system with persistent state.
 
 **What to Expect:** You will learn to architect a complete, modular service from scratch. You will see how to integrate external services, manage application state, and establish disciplined development patterns that scale.
 
@@ -215,7 +215,7 @@ sequenceDiagram
 
 **Your Path:**
 1.  Follow the deep dive into architecting a state-aware bot, integrating the Axum web framework, the Teloxide bot framework, and the SQLx database toolkit.
-    *   **Study Guide:** [Architecting a State-Aware Conversational Bot in Rust: A Deep Dive](../technical_guides/rust/architecting-a-state-aware-conversational-bot.md)
+    *   **Study Guide:** [Building Production-Ready Telegram Bots in Rust: From Zero to Deployment](../technical_guides/rust/building-production-ready-telegram-bots-in-rust-from-zero-to-deployment.md)
 
 ---
 
