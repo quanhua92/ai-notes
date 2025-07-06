@@ -49,6 +49,9 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 *   [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./technical_guides/postgresql/gpostresql-a-feynman-method-guide-from-fundamentals-to-production.md)
     *   *Core Concepts: Architecture (MVCC, WAL), SQL Mastery, Performance Engineering (`EXPLAIN`, Indexing), Row-Level Security (RLS).*
+*   [PostgreSQL High Availability from Scratch: A Practical Guide to Multi-Region Clusters](./technical_guides/postgresql/postgresql-high-availability-from-scratch-a-practical-guide-to-multi-region-clusters.md)
+    *   *Core Concepts: Multi-Region Architecture, Patroni Cluster Management, etcd Distributed Consensus, HAProxy Load Balancing, Production Security (mTLS), Automated Failover.*
+
 
 ### React
 

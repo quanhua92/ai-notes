@@ -172,6 +172,8 @@ graph TD
 **Your Path:**
 1.  Build a deep mental model of how PostgreSQL works, from its core architecture to mastering advanced SQL and performance tuning.
     *   **Study Guide:** [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](../technical_guides/postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
+2.  Master high availability and disaster recovery by building production-grade PostgreSQL clusters that survive data center failures.
+    *   **Study Guide:** [PostgreSQL High Availability from Scratch: A Practical Guide to Multi-Region Clusters](../technical_guides/postgresql/postgresql-high-availability-from-scratch-a-practical-guide-to-multi-region-clusters.md)
 
 ### Chapter 3: Building a Stateful Application
 
