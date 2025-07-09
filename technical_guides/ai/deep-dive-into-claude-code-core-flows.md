@@ -1,3 +1,32 @@
+# Table of Contents
+
+- [Deep Dive into Claude Code's Core Flows](#deep-dive-into-claude-codes-core-flows)
+  - [1. Context-Aware File System Navigation](#1-context-aware-file-system-navigation)
+  - [2. Multi-File Coherent Editing](#2-multi-file-coherent-editing)
+  - [3. Iterative Refinement Through Testing](#3-iterative-refinement-through-testing)
+  - [4. Natural Language Task Decomposition](#4-natural-language-task-decomposition)
+  - [5. Intelligent Code Generation with Pattern Recognition](#5-intelligent-code-generation-with-pattern-recognition)
+  - [6. Debugging Through Systematic Analysis](#6-debugging-through-systematic-analysis)
+  - [7. Refactoring with Semantic Preservation](#7-refactoring-with-semantic-preservation)
+  - [8. Documentation Generation and Synchronization](#8-documentation-generation-and-synchronization)
+  - [9. Dependency Management and Integration](#9-dependency-management-and-integration)
+  - [10. Performance Optimization Through Profiling Integration](#10-performance-optimization-through-profiling-integration)
+  - [Integration and Synergy](#integration-and-synergy)
+- [Comprehensive POC Development Plan: AI Code Assistant System](#comprehensive-poc-development-plan-ai-code-assistant-system)
+  - [System Architecture Overview](#system-architecture-overview)
+  - [Detailed File Structure](#detailed-file-structure)
+  - [Detailed Implementation Plan](#detailed-implementation-plan)
+    - [Phase 1: Core Infrastructure (Week 1-2)](#phase-1-core-infrastructure-week-1-2)
+    - [Phase 2: Individual Flow Engines (Week 3-6)](#phase-2-individual-flow-engines-week-3-6)
+    - [Phase 3: Integration Layer (Week 7-8)](#phase-3-integration-layer-week-7-8)
+    - [Phase 4: Demo Scripts and Generators (Week 9-10)](#phase-4-demo-scripts-and-generators-week-9-10)
+    - [Phase 5: Advanced Features Implementation](#phase-5-advanced-features-implementation)
+  - [Future Improvements and Features](#future-improvements-and-features)
+  - [Testing Strategy](#testing-strategy)
+  - [Deployment and Distribution](#deployment-and-distribution)
+  - [Conclusion](#conclusion)
+
+
 # Deep Dive into Claude Code's Core Flows
 
 ## 1. Context-Aware File System Navigation
