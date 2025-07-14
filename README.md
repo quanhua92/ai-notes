@@ -98,24 +98,26 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ## 🛠️ Prompt Engineering Templates
 
-### Content Creation & Learning
+**Powerful, protocol-based prompts with a MANDATORY PROCESSING PROTOCOL that forces AI systems to think systematically and deliver consistent, professional results.** Each prompt follows a proven 4-stage approach: Data Ingestion → Execution Planning → Synthesis & Generation → Finalization. [→ Complete Guide](./prompts/README.md)
 
-*   **[Comprehensive Learning](./prompts/comprehensive-learning.md)**: Generates a structured and comprehensive learning plan for mastering a new topic, from fundamentals to advanced applications.
-*   **[Learning Path Generator](./prompts/learning-path-generator.md)**: Creates a structured learning path article using the Feynman Teaching Technique to explain content in simple terms, with a mermaid chart and links to specific articles.
-*   **[Feynman Article Generator](./prompts/feynman-article-generator.md)**: Generates a comprehensive technical article from a discussion using a structured, Feynman-inspired format.
-*   **[Feynman Article Enhancer - Auto Suggestions](./prompts/feynman-article-enhancer.md)**: Enhances an existing educational article by elaborating on concepts, adding diagrams, and providing deeper examples, all guided by the Feynman method.
-*   **[Feynman Article Refiner - Manual Suggestions](./prompts/feynman-article-refiner.md)**: Refines a technical article by systematically applying a specific list of improvement suggestions, ideal for iterative content development.
-*   **[Tutorials Generator](./prompts/tutorials-generator.md)**: Creates comprehensive tutorial content with step-by-step instructions for technical topics and implementations.
+### 📚 Content Creation & Learning
 
-### Audio & Video Processing
+*   **[Comprehensive Learning](./prompts/comprehensive-learning.md)**: Creates comprehensive learning guides that take you from zero to mastery on any topic. Accepts any input format, auto-detects learning level, and creates 6-section guides with diagrams and hands-on exercises.
+*   **[Learning Path Generator](./prompts/learning-path-generator.md)**: Combines multiple technical resources into cohesive, narrative-driven learning journeys with engaging themes and visual learning maps.
+*   **[Feynman Article Generator](./prompts/feynman-article-generator.md)**: Transforms technical discussions, documentation, or research into clear, standalone articles using the Feynman teaching method with 6-section structure.
+*   **[Feynman Article Enhancer](./prompts/feynman-article-enhancer.md)**: Takes existing educational articles and enhances them with deeper examples, better diagrams, and clearer explanations.
+*   **[Feynman Article Refiner](./prompts/feynman-article-refiner.md)**: Systematically applies specific improvement suggestions to refine technical articles for iterative content development.
 
-*   **[Video Transcription Enhancer](./prompts/video-transcription-enhancer.md)**: Reformats raw text transcripts for clarity, structure, and readability while preserving the original content verbatim.
-*   **[Audio Transcript Refiner](./prompts/audio-transcript-refiner.md)**: Corrects errors in raw, machine-generated transcripts, improving grammar and structure to produce a clean and accurate text that preserves the speaker's original intent.
-*   **[Audio Transcript Summarizer](./prompts/audio-transcript-summarizer.md)**: Analyzes raw, machine-generated transcripts to extract key information-such as decisions, action items, and conclusions-and presents it as a concise, time-stamped summary.
+### 🎵 Audio & Video Processing
 
-### Engineering & Architecture
+*   **[Audio Transcript Refiner](./prompts/audio-transcript-refiner.md)**: Corrects errors in machine-generated transcripts while preserving the original speaker's intent and style.
+*   **[Audio Transcript Summarizer](./prompts/audio-transcript-summarizer.md)**: Extracts key information from transcripts and presents it as concise, time-stamped summaries with decisions and action items.
+*   **[Video Transcription Enhancer](./prompts/video-transcription-enhancer.md)**: Takes raw, messy video transcripts and reformats them for clarity and professional presentation.
 
-*   **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams.
-*   **[PoC Implementation Plan Generator](./prompts/poc-implementation-plan-generator.md)**: Generates a comprehensive Proof of Concept (PoC) implementation plan for a software system, leveraging a GitHub repository and related articles, tailored to a specific input goal.
-*   **[System Design Expert](./prompts/system-design-expert.md)**: Provides expert-level system design guidance and architectural recommendations for complex software systems.
-*   **[Documentation Generator](./prompts/docs-generator.md)**: Analyzes codebases comprehensively and generates complete, production-grade documentation ecosystems that explore all aspects of the system.
+### 🏗️ Engineering & Architecture
+
+*   **[Documentation Generator](./prompts/docs-generator.md)**: Analyzes codebases comprehensively and generates complete, production-grade documentation ecosystems. Deep analysis beyond surface-level explanations with essential docs, tutorial series, and visual diagrams.
+*   **[Tutorials Generator](./prompts/tutorials-generator.md)**: Creates detailed, step-by-step tutorial content with hands-on instructions for technical topics and implementations.
+*   **[PoC Implementation Plan Generator](./prompts/poc-implementation-plan-generator.md)**: Creates comprehensive Proof of Concept implementation plans with timelines, milestones, and success criteria for validating technical approaches.
+*   **[System Design Expert](./prompts/system-design-expert.md)**: Provides expert-level system design analysis and architectural recommendations. Accepts problems, scenarios, or challenges and generates critical questions with trade-off analysis.
+*   **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Transforms informal discussions into formal, comprehensive technical feature request documents with architecture, APIs, and rollout plans.
