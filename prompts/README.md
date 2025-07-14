@@ -170,6 +170,26 @@ This architecture ensures AI follows your expected approach while adapting to di
 
 ---
 
+### [example-to-tutorial-converter.md](./example-to-tutorial-converter.md)
+**What it does**: Analyzes project example folders and generates comprehensive tutorial series using the Feynman method  
+**Perfect for**:
+- Open source maintainers creating educational content from examples
+- Engineering teams documenting their example code
+- Educators building curriculum from existing code samples
+- Technical writers turning code examples into learning materials
+
+**Capabilities**:
+- Analyzes parent library/framework to understand core concepts
+- Creates one tutorial per example folder with three-part structure
+- Uses Feynman teaching method: Core Concept → Practical Walkthrough → Mental Models
+- Generates self-contained lessons with annotated code snippets
+- Builds intuitive understanding through analogies and mental models
+- Creates professional, mentor-like educational content
+
+**Use when**: You have example folders in a project that need to become comprehensive tutorials
+
+---
+
 ### [poc-implementation-plan-generator.md](./poc-implementation-plan-generator.md)
 **What it does**: Creates comprehensive Proof of Concept implementation plans with timelines, milestones, and success criteria  
 **Perfect for**:
