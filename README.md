@@ -83,15 +83,23 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ## 🛠️ Prompt Engineering Templates
 
-*   **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams.
+### Content Creation & Learning
+
 *   **[Comprehensive Learning](./prompts/comprehensive-learning.md)**: Generates a structured and comprehensive learning plan for mastering a new topic, from fundamentals to advanced applications.
 *   **[Learning Path Generator](./prompts/learning-path-generator.md)**: Creates a structured learning path article using the Feynman Teaching Technique to explain content in simple terms, with a mermaid chart and links to specific articles.
 *   **[Feynman Article Generator](./prompts/feynman-article-generator.md)**: Generates a comprehensive technical article from a discussion using a structured, Feynman-inspired format.
 *   **[Feynman Article Enhancer - Auto Suggestions](./prompts/feynman-article-enhancer.md)**: Enhances an existing educational article by elaborating on concepts, adding diagrams, and providing deeper examples, all guided by the Feynman method.
 *   **[Feynman Article Refiner - Manual Suggestions](./prompts/feynman-article-refiner.md)**: Refines a technical article by systematically applying a specific list of improvement suggestions, ideal for iterative content development.
+*   **[Tutorials Generator](./prompts/tutorials-generator.md)**: Creates comprehensive tutorial content with step-by-step instructions for technical topics and implementations.
+
+### Audio & Video Processing
+
 *   **[Video Transcription Enhancer](./prompts/video-transcription-enhancer.md)**: Reformats raw text transcripts for clarity, structure, and readability while preserving the original content verbatim.
 *   **[Audio Transcript Refiner](./prompts/audio-transcript-refiner.md)**: Corrects errors in raw, machine-generated transcripts, improving grammar and structure to produce a clean and accurate text that preserves the speaker's original intent.
 *   **[Audio Transcript Summarizer](./prompts/audio-transcript-summarizer.md)**: Analyzes raw, machine-generated transcripts to extract key information-such as decisions, action items, and conclusions-and presents it as a concise, time-stamped summary.
+
+### Engineering & Architecture
+
+*   **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams.
 *   **[PoC Implementation Plan Generator](./prompts/poc-implementation-plan-generator.md)**: Generates a comprehensive Proof of Concept (PoC) implementation plan for a software system, leveraging a GitHub repository and related articles, tailored to a specific input goal.
 *   **[System Design Expert](./prompts/system-design-expert.md)**: Provides expert-level system design guidance and architectural recommendations for complex software systems.
-*   **[Tutorials Generator](./prompts/tutorials-generator.md)**: Creates comprehensive tutorial content with step-by-step instructions for technical topics and implementations.
