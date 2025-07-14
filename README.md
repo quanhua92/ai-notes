@@ -6,6 +6,10 @@ Exploring ideas, prompts, and personal insights from curious conversations with 
 
 ## 🗺️ Learning Paths
 
+Comprehensive, structured learning journeys that guide you from fundamentals to advanced mastery across interconnected technology stacks.
+
+### Full-Stack & AI Engineering
+
 *   [The Rust-Powered Architect: A Modern Path from Backend to AI](./learning_paths/the-rust-powered-architect.md)
     *   *Core Concepts: Structured Learning Path, Feynman Technique, Full-Stack Architecture, Backend (Rust, Postgres), Frontend (React), Infrastructure (Kafka, Observability), AI Engineering (RAG, Agents).*
 
@@ -17,18 +21,29 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### AI
 
-*   [Building a Performant AI Agent Framework in Rust from Scratch](./technical_guides/ai/rust-ai-agent-framework-from-scratch.md)
-    *   *Core Concepts: ReAct Paradigm, Modular Design (Traits), Tool Use, State Management, Async Orchestration.*
-*   [Kubrick Course Learning Guide to Multimodal AI Systems](./technical_guides/ai/kubrick-course-learning-guide.md)
-    *   *Core Concepts: Multimodal Agents, Model Context Protocol (MCP), Four Pillars (Pixeltable, FastMCP, Groq, Opik), Multi-Agent Collaboration, Observability.*
-*   [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./technical_guides/ai/llm-reverse-engineering.md)
-    *   *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
-*   [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./technical_guides/ai/mastering-pytorch-for-llms.md)
-    *   *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
-*   [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./technical_guides/ai/rust-multimodel-ai-agents.md)
-    *   *Core Concepts: Rust for AI, ReAct Loop, Model Context Protocol (MCP), Four Pillars (Axum, Qdrant, Tokio, Tracing), Fearless Concurrency.*
+#### Fundamentals & Engineering
 *   [The Engineer's Guide to Production-Ready Generative AI](./technical_guides/ai/the-engineer-guide-to-production-ready-generative-ai.md)
     *   *Core Concepts: AI Engineering, Transformers, Attention Mechanism, Prompt Engineering, RAG (Retrieval-Augmented Generation), AI Agents, LLMOps, LLM-as-a-Judge.*
+*   [Mastering PyTorch for Large Language Models: From Fundamentals to Frontier](./technical_guides/ai/mastering-pytorch-for-llms.md)
+    *   *Core Concepts: Tensors, Autograd, nn.Module, optim, Dataset, DataLoader.*
+*   [LLM Reverse-Engineering: A Generalized Framework and Analysis of Modern Architectures](./technical_guides/ai/llm-reverse-engineering.md)
+    *   *Core Concepts: Reverse-Engineering Framework, "Visualize, Hypothesize, Verify", Comparative Triage, Netron, Architectural Analysis (Gemma, DeepSeek, Llama, Qwen).*
+
+#### AI Code Assistants
+*   [Introduction to AI Code Assistants](./technical_guides/ai/introduction-to-ai-code-assistants.md)
+    *   *Core Concepts: AI-Powered Development, Code Assistant Fundamentals, Integration Patterns, Best Practices.*
+*   [Technical Foundations of AI Code Assistants](./technical_guides/ai/technical-foundations-of-ai-code-assistants.md)
+    *   *Core Concepts: Technical Architecture, AI Integration, Development Infrastructure, Implementation Strategies.*
+*   [Deep Dive into Claude Code Core Flows](./technical_guides/ai/deep-dive-into-claude-code-core-flows.md)
+    *   *Core Concepts: Claude Code Architecture, Core Workflows, Internal Mechanisms, Development Patterns.*
+
+#### AI Agents & Multimodal Systems
+*   [Building a Performant AI Agent Framework in Rust from Scratch](./technical_guides/ai/rust-ai-agent-framework-from-scratch.md)
+    *   *Core Concepts: ReAct Paradigm, Modular Design (Traits), Tool Use, State Management, Async Orchestration.*
+*   [The AURORA Project: A Production-Focused Guide to Building Multimodal AI Agents in Rust](./technical_guides/ai/rust-multimodel-ai-agents.md)
+    *   *Core Concepts: Rust for AI, ReAct Loop, Model Context Protocol (MCP), Four Pillars (Axum, Qdrant, Tokio, Tracing), Fearless Concurrency.*
+*   [Kubrick Course Learning Guide to Multimodal AI Systems](./technical_guides/ai/kubrick-course-learning-guide.md)
+    *   *Core Concepts: Multimodal Agents, Model Context Protocol (MCP), Four Pillars (Pixeltable, FastMCP, Groq, Opik), Multi-Agent Collaboration, Observability.*
 
 ### CSS
 
@@ -41,13 +56,13 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### Observability
 
-*   [A Comprehensive Guide to Production-Grade Monitoring with Grafana, Prometheus, and Loki](./technical_guides/observability/a-mcoprehensive-guide-to-production-grade-monitoring-with-grafana-prometheus-and-loki.md)
+*   [A Comprehensive Guide to Production-Grade Monitoring with Grafana, Prometheus, and Loki](./technical_guides/observability/a-comprehensive-guide-to-production-grade-monitoring-with-grafana-prometheus-and-loki.md)
     *   *Core Concepts: PLG Stack, Shared Label Philosophy, Metrics & Logs Correlation, Docker Compose, Production Readiness (Security, HA, Performance), Alerting Philosophy, OpenTelemetry.*
       
 
 ### PostgreSQL
 
-*   [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./technical_guides/postgresql/gpostresql-a-feynman-method-guide-from-fundamentals-to-production.md)
+*   [PostgreSQL 17: A Feynman-Method Guide from Fundamentals to Production](./technical_guides/postgresql/postgresql-a-feynman-method-guide-from-fundamentals-to-production.md)
     *   *Core Concepts: Architecture (MVCC, WAL), SQL Mastery, Performance Engineering (`EXPLAIN`, Indexing), Row-Level Security (RLS).*
 *   [PostgreSQL High Availability from Scratch: A Practical Guide to Multi-Region Clusters](./technical_guides/postgresql/postgresql-high-availability-from-scratch-a-practical-guide-to-multi-region-clusters.md)
     *   *Core Concepts: Multi-Region Architecture, Patroni Cluster Management, etcd Distributed Consensus, HAProxy Load Balancing, Production Security (mTLS), Automated Failover.*
@@ -60,17 +75,17 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ### Rust
 
+#### Fundamentals & Patterns
+*   [A Deep Dive into Rust: From Fundamentals to Production Patterns](./technical_guides/rust/a-edep-dive-into-rust-from-fundamentals-to-production-patterns.md)
+    *   *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
 *   [10 Essential Rust Patterns for Robust Code](./technical_guides/rust/10-essential-rust-patterns-for-robust-code.md)
     *   *Core Concepts: RAII, Result Pattern, Builder Pattern, Newtype, Typestate, Dynamic Dispatch, Send/Sync, GATs.*
 
-*   [A Deep Dive into Rust: From Fundamentals to Production Patterns](./technical_guides/rust/a-edep-dive-into-rust-from-fundamentals-to-production-patterns.md)
-    *   *Core Concepts: Structs and Enums, Traits, Concurrency with Tokio and Rayon, Design Patterns.*
-
+#### Production Applications
+*   [Type-Safe Full-Stack Development: Rust & TypeScript](./technical_guides/rust/type-safe-full-stack-development-rust-typescript.md)
+    *   *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 *   [Building Production-Ready Telegram Bots in Rust: From Zero to Deployment](./technical_guides/rust/building-production-ready-telegram-bots-in-rust-from-zero-to-deployment.md)
     *   *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
-
-*   [Building Production-Ready Telegram Bots in Rust: From Zero to Deployment](./technical_guides/rust/type-safe-full-stack-development-rust-typescript.md)
-    *   *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 -----
 
 ## 📚 Content Summaries
