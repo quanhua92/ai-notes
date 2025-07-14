@@ -36,6 +36,25 @@ This architecture ensures AI follows your expected approach while adapting to di
 
 ---
 
+### [learning-path-generator.md](./learning-path-generator.md)
+**What it does**: Combines multiple technical resources into cohesive, narrative-driven learning journeys  
+**Perfect for**:
+- Curriculum designers connecting multiple topics
+- Self-learners organizing scattered resources
+- Training managers creating structured programs
+- Educators building comprehensive courses
+
+**Capabilities**:
+- Processes collections of articles, documentation, or topic areas
+- Creates engaging narrative themes ("The Architect's Path", etc.)
+- Maps learning progression from fundamentals to mastery
+- Includes visual learning maps with Mermaid charts
+- Links to source materials throughout the journey
+
+**Use when**: You have multiple learning resources that need to be organized into a coherent progression
+
+---
+
 ### [feynman-article-generator.md](./feynman-article-generator.md)
 **What it does**: Transforms technical discussions, documentation, or research into clear, standalone articles using the Feynman teaching method  
 **Perfect for**:
@@ -79,50 +98,7 @@ This architecture ensures AI follows your expected approach while adapting to di
 
 ---
 
-### [learning-path-generator.md](./learning-path-generator.md)
-**What it does**: Combines multiple technical resources into cohesive, narrative-driven learning journeys  
-**Perfect for**:
-- Curriculum designers connecting multiple topics
-- Self-learners organizing scattered resources
-- Training managers creating structured programs
-- Educators building comprehensive courses
-
-**Capabilities**:
-- Processes collections of articles, documentation, or topic areas
-- Creates engaging narrative themes ("The Architect's Path", etc.)
-- Maps learning progression from fundamentals to mastery
-- Includes visual learning maps with Mermaid charts
-- Links to source materials throughout the journey
-
-**Use when**: You have multiple learning resources that need to be organized into a coherent progression
-
----
-
-### [tutorials-generator.md](./tutorials-generator.md)
-**What it does**: Creates detailed, step-by-step tutorial content with hands-on instructions  
-**Perfect for**:
-- Instructors creating practical exercises
-- Technical trainers building workshops
-- Content creators making how-to guides
-- Teams documenting procedures
-
-**Use when**: You need practical, actionable instructions rather than conceptual explanations
-
----
-
 ## 🎵 Audio & Video Processing
-
-### [video-transcription-enhancer.md](./video-transcription-enhancer.md)
-**What it does**: Takes raw, messy video transcripts and reformats them for clarity and professional presentation  
-**Perfect for**:
-- Content creators cleaning up video transcripts
-- Educators preparing lecture notes
-- Podcasters creating show notes
-- Anyone turning spoken content into readable text
-
-**Use when**: You have video/audio content that needs to become readable documentation
-
----
 
 ### [audio-transcript-refiner.md](./audio-transcript-refiner.md)
 **What it does**: Corrects errors in machine-generated transcripts while preserving the original speaker's intent and style  
@@ -148,7 +124,63 @@ This architecture ensures AI follows your expected approach while adapting to di
 
 ---
 
+### [video-transcription-enhancer.md](./video-transcription-enhancer.md)
+**What it does**: Takes raw, messy video transcripts and reformats them for clarity and professional presentation  
+**Perfect for**:
+- Content creators cleaning up video transcripts
+- Educators preparing lecture notes
+- Podcasters creating show notes
+- Anyone turning spoken content into readable text
+
+**Use when**: You have video/audio content that needs to become readable documentation
+
+---
+
 ## 🏗️ Engineering & Architecture
+
+### [docs-generator.md](./docs-generator.md)
+**What it does**: Analyzes codebases comprehensively and generates complete, production-grade documentation ecosystems  
+**Perfect for**:
+- Engineering teams needing comprehensive documentation
+- Open source projects requiring professional docs
+- Startups creating technical documentation from scratch
+- Organizations improving existing documentation standards
+
+**Capabilities**:
+- Deep codebase analysis beyond surface-level explanations
+- Generates essential docs: README, GETTING_STARTED, ARCHITECTURE, API_REFERENCE, DATABASE_DESIGN
+- Creates structured tutorial series (concepts → guides → deep-dives)
+- Includes deployment guides, security documentation, troubleshooting
+- Designed to run before tutorials-generator for comprehensive coverage
+- Production-grade quality with visual diagrams and cross-references
+
+**Use when**: You need a complete documentation ecosystem that explores all aspects of your system
+
+---
+
+### [tutorials-generator.md](./tutorials-generator.md)
+**What it does**: Creates detailed, step-by-step tutorial content with hands-on instructions  
+**Perfect for**:
+- Instructors creating practical exercises
+- Technical trainers building workshops
+- Content creators making how-to guides
+- Teams documenting procedures
+
+**Use when**: You need practical, actionable instructions rather than conceptual explanations
+
+---
+
+### [poc-implementation-plan-generator.md](./poc-implementation-plan-generator.md)
+**What it does**: Creates comprehensive Proof of Concept implementation plans with timelines, milestones, and success criteria  
+**Perfect for**:
+- Engineering managers planning prototypes
+- Startups validating technical approaches
+- Teams exploring new technologies
+- Anyone needing structured experimentation plans
+
+**Use when**: You want to validate a technical approach before full implementation
+
+---
 
 ### [system-design-expert.md](./system-design-expert.md)
 **What it does**: Provides expert-level system design analysis and architectural recommendations  
@@ -188,18 +220,6 @@ This architecture ensures AI follows your expected approach while adapting to di
 
 ---
 
-### [poc-implementation-plan-generator.md](./poc-implementation-plan-generator.md)
-**What it does**: Creates comprehensive Proof of Concept implementation plans with timelines, milestones, and success criteria  
-**Perfect for**:
-- Engineering managers planning prototypes
-- Startups validating technical approaches
-- Teams exploring new technologies
-- Anyone needing structured experimentation plans
-
-**Use when**: You want to validate a technical approach before full implementation
-
----
-
 ## 🎯 How to Choose the Right Prompt
 
 **For Learning Something New**: Start with `comprehensive-learning.md`  
@@ -209,6 +229,7 @@ This architecture ensures AI follows your expected approach while adapting to di
 **For Feature Planning**: Use `technical-feature-request-document.md`  
 **For Content From Audio/Video**: Pick the appropriate transcript processor  
 **For Step-by-Step Instructions**: Use `tutorials-generator.md`  
+**For Complete Documentation Systems**: Use `docs-generator.md` first, then `tutorials-generator.md`  
 
 ## 🚀 Getting Started
 

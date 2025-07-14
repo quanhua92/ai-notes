@@ -118,3 +118,4 @@ All guides are structured using the Feynman learning method to build deep, intui
 *   **[Technical Feature Request Document](./prompts/technical-feature-request-document.md)**: Generates a structured technical feature request document from a discussion for engineering teams.
 *   **[PoC Implementation Plan Generator](./prompts/poc-implementation-plan-generator.md)**: Generates a comprehensive Proof of Concept (PoC) implementation plan for a software system, leveraging a GitHub repository and related articles, tailored to a specific input goal.
 *   **[System Design Expert](./prompts/system-design-expert.md)**: Provides expert-level system design guidance and architectural recommendations for complex software systems.
+*   **[Documentation Generator](./prompts/docs-generator.md)**: Analyzes codebases comprehensively and generates complete, production-grade documentation ecosystems that explore all aspects of the system.
