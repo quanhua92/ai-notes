@@ -90,6 +90,10 @@ All guides are structured using the Feynman learning method to build deep, intui
 
 ## 📚 Content Summaries
 
+### AI
+*   [The Ultimate MCP Crash Course - Build From Scratch](./content_summaries/ai/the-ultimate-mcp-crash-course-build-from-scratch.md)
+    *   *Core Concepts: Model Context Protocol (MCP), MCP Server/Client Architecture, Tools, Resources, Prompts, Sampling, TypeScript SDK, VS Code Integration, GitHub Copilot Integration.*
+
 ### Personal Finance
 *   [Financial Literacy for Dummies (Like Me) with JL Collins](./content_summaries/personal_finance/financial-literacy-with-jl-collins.md)
     *   *Core Concepts: The Simple Path to Wealth, Spend Less Than You Earn, Index Fund Investing (VTSAX), Avoiding Debt, Financial Independence (FI), F.U. Money, Market Crashes.*
