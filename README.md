@@ -86,6 +86,8 @@ All guides are structured using the Feynman learning method to build deep, intui
     *   *Core Concepts: SSoT, JSON Schema, `schemars`, `serde`, Enum Strategies, Generics, Automation, Ecosystem Benefits.*
 *   [Building Production-Ready Telegram Bots in Rust: From Zero to Deployment](./technical_guides/rust/building-production-ready-telegram-bots-in-rust-from-zero-to-deployment.md)
     *   *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
+*   [Rust Architecture Patterns](./technical_guides/rust/rust-architecture-patterns.md)
+    *   *Core Concepts: Integration Test Architecture, Repository Pattern, Domain Events, Event Sourcing, CQRS, Observability, Error Handling, Validation Rules Engine.*
 -----
 
 ## 📚 Content Summaries
