@@ -66,6 +66,8 @@ All guides are structured using the Feynman learning method to build deep, intui
     *   *Core Concepts: Architecture (MVCC, WAL), SQL Mastery, Performance Engineering (`EXPLAIN`, Indexing), Row-Level Security (RLS).*
 *   [PostgreSQL High Availability from Scratch: A Practical Guide to Multi-Region Clusters](./technical_guides/postgresql/postgresql-high-availability-from-scratch-a-practical-guide-to-multi-region-clusters.md)
     *   *Core Concepts: Multi-Region Architecture, Patroni Cluster Management, etcd Distributed Consensus, HAProxy Load Balancing, Production Security (mTLS), Automated Failover.*
+*   [Mastering the PostgreSQL Job Queue: A Comprehensive Guide to High-Throughput Production Systems](./technical_guides/postgresql/mastering-the-postgresql-job-queue.md)
+    *   *Core Concepts: Job Queue Implementation, SKIP LOCKED, Lock Contention, Connection Pooling (PgBouncer), Table Partitioning, VACUUM Strategy.*
 
 
 ### React
