@@ -90,6 +90,11 @@ All guides are structured using the Feynman learning method to build deep, intui
     *   *Core Concepts: Axum Webhooks, Teloxide FSM, SQLx for Persistent State, Modular Monolith Architecture.*
 *   [Rust Architecture Patterns](./technical_guides/rust/rust-architecture-patterns.md)
     *   *Core Concepts: Integration Test Architecture, Repository Pattern, Domain Events, Event Sourcing, CQRS, Observability, Error Handling, Validation Rules Engine.*
+
+### System Design
+
+*   [Distributed Task Execution Workflow Patterns](./technical_guides/system_design/distributed-task-execution-workflow-patterns.md) (Python) | [Go](./technical_guides/system_design/distributed-task-execution-workflow-patterns-go.md) | [Rust](./technical_guides/system_design/distributed-task-execution-workflow-patterns-rust.md) | [TypeScript](./technical_guides/system_design/distributed-task-execution-workflow-patterns-typescript.md)
+    *   *Core Concepts: Task Lifecycle, Priority Scheduling, Worker Assignment, Retry Strategies, Circuit Breaker, Dead Letter Queues, DAGs, Sagas.*
 -----
 
 ## 📚 Content Summaries
