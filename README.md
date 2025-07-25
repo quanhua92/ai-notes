@@ -6,12 +6,29 @@ Exploring ideas, prompts, and personal insights from curious conversations with 
 
 ## 🗺️ Learning Paths
 
-Comprehensive, structured learning journeys that guide you from fundamentals to advanced mastery across interconnected technology stacks.
+**NEW**: The monolithic learning path has been redesigned into **6 focused, digestible journeys** that let you master specific domains at your own pace. Each path is 2-8 weeks and can be combined for deeper expertise.
 
-### Full-Stack & AI Engineering
+**[→ Complete Learning Paths Guide](./learning_paths/README.md)**
 
-*   [The Rust-Powered Architect: A Modern Path from Backend to AI](./learning_paths/the-rust-powered-architect.md)
-    *   *Core Concepts: Structured Learning Path, Feynman Technique, Full-Stack Architecture, Backend (Rust, Postgres), Frontend (React), Infrastructure (Kafka, Observability), AI Engineering (RAG, Agents).*
+### Choose Your Journey
+
+🦀 **[The Rust Systems Engineer](./learning_paths/rust-systems-engineer.md)** (4-6 weeks)  
+*Build high-performance, memory-safe systems from scratch*
+
+🗄️ **[The Database Architect](./learning_paths/database-architect.md)** (3-4 weeks)  
+*Master PostgreSQL from fundamentals to production clusters*
+
+⚛️ **[The Modern Frontend Developer](./learning_paths/modern-frontend-developer.md)** (2-3 weeks)  
+*Build type-safe, performant UIs with React + Tailwind*
+
+🤖 **[The AI Engineer](./learning_paths/ai-engineer.md)** (6-8 weeks)  
+*Build production-ready AI systems from LLMs to multimodal agents*
+
+🏗️ **[The Infrastructure Engineer](./learning_paths/infrastructure-engineer.md)** (3-4 weeks)  
+*Master fault-tolerant messaging and observability*
+
+🎯 **[The System Design Expert](./learning_paths/system-design-expert.md)** (2-3 weeks)  
+*Master distributed patterns across multiple languages*
 
 -----
 
