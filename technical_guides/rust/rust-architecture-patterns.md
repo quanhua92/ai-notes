@@ -1581,6 +1581,7 @@ use uuid::Uuid;
 
 // Template database configuration
 static TEMPLATE_DB_NAME: &str = "rust_react_mcp_test_template";
+static TEMPLATE_PENDING: AtomicBool = AtomicBool::new(false);
 static TEMPLATE_CREATED: AtomicBool = AtomicBool::new(false);
 
 // Semaphore limits concurrent tests to match pool size
@@ -1658,11 +1659,51 @@ pub async fn create_test_db() -> Result<TestDatabase, Box<dyn std::error::Error>
 }
 
 /// Ensures template database exists with all migrations applied
+/// Uses two-phase approach: PENDING prevents multiple creators, CREATED signals completion
 async fn ensure_template_db() -> Result<(), Box<dyn std::error::Error>> {
+    // Phase 1: Check if template is already ready
     if TEMPLATE_CREATED.load(Ordering::Acquire) {
         return Ok(());
     }
 
+    // Phase 2: Try to become the creator (only one test can do this)
+    if TEMPLATE_PENDING.compare_exchange(false, true, Ordering::AcqRel, Ordering::Acquire).is_ok() {
+        // We won the race - we're responsible for creating the template
+        match create_template_database().await {
+            Ok(()) => {
+                // Mark template as ready for other tests
+                TEMPLATE_CREATED.store(true, Ordering::Release);
+                tracing::info!("Template database ready with latest migrations: {}", TEMPLATE_DB_NAME);
+                Ok(())
+            }
+            Err(e) => {
+                // Reset flags so another test can try
+                TEMPLATE_PENDING.store(false, Ordering::Release);
+                Err(e)
+            }
+        }
+    } else {
+        // Another test is creating the template - wait for it to complete
+        let mut attempts = 0;
+        const MAX_WAIT_ATTEMPTS: u32 = 100; // 10 seconds max wait
+        
+        loop {
+            if TEMPLATE_CREATED.load(Ordering::Acquire) {
+                return Ok(());
+            }
+            
+            attempts += 1;
+            if attempts >= MAX_WAIT_ATTEMPTS {
+                return Err("Timeout waiting for template database to be created by another test".into());
+            }
+            
+            tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+        }
+    }
+}
+
+/// Creates the template database with migrations - called by only one test
+async fn create_template_database() -> Result<(), Box<dyn std::error::Error>> {
     let username = std::env::var("POSTGRES_USER").unwrap_or_else(|_| "app_user".to_string());
     let password = std::env::var("POSTGRES_PASSWORD").unwrap_or_else(|_| "app_password".to_string());
     let host = std::env::var("POSTGRES_HOST").unwrap_or_else(|_| "localhost".to_string());
@@ -1672,33 +1713,35 @@ async fn ensure_template_db() -> Result<(), Box<dyn std::error::Error>> {
     let admin_url = format!("postgres://{}:{}@{}:{}/{}", username, password, host, port, admin_db);
     let mut conn = PgConnection::connect(&admin_url).await?;
 
-    // Check if template exists
-    let exists: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM pg_database WHERE datname = $1)"
-    )
-    .bind(TEMPLATE_DB_NAME)
-    .fetch_one(&mut conn)
-    .await?;
-
-    if exists {
-        TEMPLATE_CREATED.store(true, Ordering::Release);
-        return Ok(());
+    // Create template database if it doesn't exist
+    let create_result = sqlx::query(&format!("CREATE DATABASE \"{}\"", TEMPLATE_DB_NAME))
+        .execute(&mut conn)
+        .await;
+    
+    // Handle the case where database already exists (that's fine)
+    if let Err(sqlx::Error::Database(db_err)) = &create_result {
+        if db_err.code() == Some("42P04".into()) { // database already exists
+            tracing::debug!("Template database already exists, running migrations...");
+        } else {
+            create_result?; // Re-throw other database errors
+        }
+    } else {
+        create_result?; // Re-throw non-database errors
     }
 
-    // Create template and run migrations once
-    sqlx::query(&format!("CREATE DATABASE \"{}\"", TEMPLATE_DB_NAME))
-        .execute(&mut conn)
-        .await?;
+    // Close admin connection before connecting to template
+    conn.close().await?;
 
+    // Connect to template database and run migrations (idempotent)
     let template_url = format!("postgres://{}:{}@{}:{}/{}", username, password, host, port, TEMPLATE_DB_NAME);
-    let template_pool = PgPool::connect(&template_url).await?;
+    let mut template_conn = PgConnection::connect(&template_url).await?;
 
+    // SQLx migrations are idempotent - they automatically skip already-applied migrations
     sqlx::migrate!("../migrations")
-        .run(&template_pool)
+        .run(&mut template_conn)
         .await?;
 
-    TEMPLATE_CREATED.store(true, Ordering::Release);
-    tracing::info!("Template database created and migrated");
+    template_conn.close().await?;
     Ok(())
 }
 ```
