@@ -1575,14 +1575,12 @@ Connection pools are designed for application traffic—many small, similar quer
 ```rust
 use once_cell::sync::Lazy;
 use sqlx::{PgPool, PgConnection, Connection};
-use std::sync::atomic::{AtomicBool, Ordering};
-use tokio::sync::Semaphore;
+use tokio::sync::{Semaphore, OnceCell};
 use uuid::Uuid;
 
 // Template database configuration
 static TEMPLATE_DB_NAME: &str = "rust_react_mcp_test_template";
-static TEMPLATE_PENDING: AtomicBool = AtomicBool::new(false);
-static TEMPLATE_CREATED: AtomicBool = AtomicBool::new(false);
+static TEMPLATE_CREATED: OnceCell<()> = OnceCell::const_new();
 
 // Semaphore limits concurrent tests to match pool size
 static DB_SEMAPHORE: Lazy<Semaphore> = Lazy::new(|| Semaphore::new(3));
@@ -1609,7 +1607,7 @@ pub async fn create_test_db() -> Result<TestDatabase, Box<dyn std::error::Error>
     let _permit = DB_SEMAPHORE.acquire().await?;
 
     // Ensure template database exists (10x faster than running migrations each time)
-    ensure_template_db().await?;
+    TEMPLATE_CREATED.get_or_init(|| create_template_database()).await?;
 
     // Create unique test database name
     let uuid = Uuid::now_v7();
@@ -1658,49 +1656,6 @@ pub async fn create_test_db() -> Result<TestDatabase, Box<dyn std::error::Error>
     })
 }
 
-/// Ensures template database exists with all migrations applied
-/// Uses two-phase approach: PENDING prevents multiple creators, CREATED signals completion
-async fn ensure_template_db() -> Result<(), Box<dyn std::error::Error>> {
-    // Phase 1: Check if template is already ready
-    if TEMPLATE_CREATED.load(Ordering::Acquire) {
-        return Ok(());
-    }
-
-    // Phase 2: Try to become the creator (only one test can do this)
-    if TEMPLATE_PENDING.compare_exchange(false, true, Ordering::AcqRel, Ordering::Acquire).is_ok() {
-        // We won the race - we're responsible for creating the template
-        match create_template_database().await {
-            Ok(()) => {
-                // Mark template as ready for other tests
-                TEMPLATE_CREATED.store(true, Ordering::Release);
-                tracing::info!("Template database ready with latest migrations: {}", TEMPLATE_DB_NAME);
-                Ok(())
-            }
-            Err(e) => {
-                // Reset flags so another test can try
-                TEMPLATE_PENDING.store(false, Ordering::Release);
-                Err(e)
-            }
-        }
-    } else {
-        // Another test is creating the template - wait for it to complete
-        let mut attempts = 0;
-        const MAX_WAIT_ATTEMPTS: u32 = 100; // 10 seconds max wait
-        
-        loop {
-            if TEMPLATE_CREATED.load(Ordering::Acquire) {
-                return Ok(());
-            }
-            
-            attempts += 1;
-            if attempts >= MAX_WAIT_ATTEMPTS {
-                return Err("Timeout waiting for template database to be created by another test".into());
-            }
-            
-            tokio::time::sleep(std::time::Duration::from_millis(100)).await;
-        }
-    }
-}
 
 /// Creates the template database with migrations - called by only one test
 async fn create_template_database() -> Result<(), Box<dyn std::error::Error>> {
